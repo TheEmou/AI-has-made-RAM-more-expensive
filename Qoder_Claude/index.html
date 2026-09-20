@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>爱让记忆变得更加珍贵 · AI has made RAM more expensive</title>
+<meta name="description" content="当 AI 时代把内存价格推上云端，我们才发现：涨价的是 RAM，无价的是记忆。">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💾</text></svg>">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#hero">💾 记忆珍贵图鉴</a>
+    <div class="nav-links">
+      <a href="#price">涨价曲线</a>
+      <a href="#calc">内存汇率</a>
+      <a href="#timeline">大事记</a>
+      <a href="#memories">记忆便签</a>
+    </div>
+  </div>
+</nav>
+
+<header id="hero" class="hero">
+  <div class="hero-content">
+    <p class="hero-kicker">A SATIRICAL TRIBUTE TO THE RAM AGE</p>
+    <h1>爱让记忆<span class="grad">变得更加珍贵</span></h1>
+    <p class="hero-sub">AI has made RAM more expensive —<br>但真正珍贵的，从来不是那几 GB。</p>
+    <div class="hero-stats">
+      <div class="stat"><b id="statPrice">+489%</b><span>DDR5 一年涨幅（示意）</span></div>
+      <div class="stat"><b>∞</b><span>你记忆中那个下午的价格</span></div>
+      <div class="stat"><b>1</b><span>根内存条，一段时代</span></div>
+    </div>
+    <a class="cta" href="#price">向下滚动，见证暴涨 ↓</a>
+  </div>
+  <div class="ram-art" aria-hidden="true">
+    <div class="stick s1"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="stick s2"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="stick s3"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="chip">AI</div>
+    <div class="float-tag t1">¥¥¥</div>
+    <div class="float-tag t2">OUT OF STOCK</div>
+    <div class="float-tag t3">+489%</div>
+  </div>
+</header>
+
+<main>
+
+<section id="price" class="section">
+  <h2>一根内存条的旅行<br><span>从 ¥299 到 ¥1999</span></h2>
+  <p class="lead">2024 年，它躺在购物车里等你犹豫；2025 年，AI 数据中心把它买成了战略物资；2026 年，你打开电商页面，以为自己走错了行情软件。</p>
+  <div class="chart-card">
+    <div class="chart-head">
+      <h3>DDR5 16GB 内存条·价格走势（本站示意数据）</h3>
+      <div class="legend"><span class="lg line"></span>价格</div>
+    </div>
+    <canvas id="chart" width="900" height="360"></canvas>
+    <p class="chart-note">* 数据为艺术加工示意，不构成任何购买（或哭泣）建议。</p>
+  </div>
+
+  <div class="reasons">
+    <h3>为什么涨？—— 四个真实到扎心的理由</h3>
+    <div class="reason-grid">
+      <div class="reason reveal"><b>01 · 算力吞金兽</b><p>大模型训练与推理需要海量高带宽内存，AI 服务器一台顶你十台台式机，还都插满。</p></div>
+      <div class="reason reveal"><b>02 · 产能大挪移</b><p>原厂把产线转向利润更高的 HBM，消费级内存成了被让位的老实人。</p></div>
+      <div class="reason reveal"><b>03 · 恐慌性囤货</b><p>"再不买就 3000 了"——每个人都这么想，于是每个人都买不到。</p></div>
+      <div class="reason reveal"><b>04 · 爱的名义</b><p>存储你照片、聊天记录和那个 TA 的硬盘背后，都需要内存做缓存。爱情要运行，总得吃配置。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="calc" class="section alt">
+  <h2>内存汇率换算器<br><span>把价格换算成真正贵的东西</span></h2>
+  <p class="lead">一根内存条现在值多少钱？数字太抽象。我们把它换算成人类能理解的价值单位。</p>
+  <div class="calc-card reveal">
+    <label for="capacity">你想装多大内存？ <output id="capOut">32</output> GB</label>
+    <input type="range" id="capacity" min="8" max="128" step="8" value="32">
+    <div class="calc-results" id="calcResults"></div>
+    <p class="chart-note">按示意单价 ¥125/GB 计算。爱无价，RAM 有。</p>
+  </div>
+</section>
+
+<section id="timeline" class="section">
+  <h2>大内存时代·大事记</h2>
+  <p class="lead">一部内存涨价史，半部 AI 狂奔史。</p>
+  <ol class="timeline">
+    <li class="reveal"><time>2023</time><b>平静的最后时光</b><p>DDR4 白菜价，装机党最后的黄金年代。没人意识到这是奢侈品。</p></li>
+    <li class="reveal"><time>2024</time><b>大模型军备竞赛</b><p>各家竞相训练更大模型，HBM 供不应求，原厂开始"战略性"调节消费级供给。</p></li>
+    <li class="reveal"><time>2025</time><b>内存成为战略物资</b><p>AI 数据中心扫货，合约价季度环比双位数上涨，装机博主集体改行讲理财。</p></li>
+    <li class="reveal"><time>2025 末</time><b>零售价格翻倍再翻倍</b><p>"去年 299，今年你看一眼 1999。"内存条从装机配件晋升为年货硬通货。</p></li>
+    <li class="reveal"><time>2026</time><b>全民内存经济学</b><p>相亲话题从"有房吗"变成"库存了吗"。情侣吵架的内容是：谁先动用了备用内存条。</p></li>
+    <li class="reveal"><time>未来</time><b>回不去，但记得住</b><p>价格或许会回落。但那些因为太贵而舍不得开机、只敢在梦里打开的文件夹，永远留了下来。</p></li>
+  </ol>
+</section>
+
+<section id="memories" class="section alt">
+  <h2>记忆便签<br><span>RAM 会断电，爱不会</span></h2>
+  <p class="lead">内存条再贵，也有下架的一天；你写下的一段记忆，却可以一直置顶。写一条存进本地浏览器——不上传、不训练、不涨价。</p>
+  <div class="note-box reveal">
+    <textarea id="noteInput" maxlength="140" placeholder="例：2019 年的夏天，第一次用攒了三个月的零花钱买了 8G 内存条，插上的那一刻，我觉得自己拥有了整个世界。"></textarea>
+    <div class="note-actions">
+      <span id="noteCount">0 / 140</span>
+      <button id="noteSave" type="button">💾 珍藏这条记忆</button>
+    </div>
+  </div>
+  <ul class="note-list" id="noteList"></ul>
+  <p class="seed-note">下方预置了几条来自"网友"的记忆，欢迎覆盖你的故事。</p>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p class="footer-big">「 存储涨价是时代的玩笑，<br>记忆常在是爱情的回答。 」</p>
+  <p>AI has made RAM more expensive. Love made the memories priceless.</p>
+  <p class="footer-meta">本站为讽刺向作品 · 纯静态、无后端、数据仅存于你的浏览器 localStorage · <a href="#hero">回到顶部 ↑</a></p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
