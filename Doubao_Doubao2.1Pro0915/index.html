@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>记忆电报局 · 爱让记忆变得更加珍贵 / AI has made RAM more expensive</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23b8352a'/%3E%3Cpath d='M32 48S14 37 14 25c0-6.5 5-10 10-10 3.6 0 6.4 2 8 4.4C33.6 17 36.4 15 40 15c5 0 10 3.5 10 10 0 12-18 23-18 23z' fill='%23f1e8d4'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Special+Elite&family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<style>
+/* ============ 基础令牌 ============ */
+:root{
+  --paper:#e7dcc0;
+  --paper-2:#ddcda9;
+  --paper-3:#f2ead3;
+  --paper-card:#efe5cb;
+  --ink:#262019;
+  --ink-soft:#5c513f;
+  --ink-faint:#8a7c63;
+  --red:#b8352a;
+  --red-deep:#8e281f;
+  --gold:#a37c2c;
+  --green:#3e6650;
+  --rule:rgba(38,32,25,.55);
+  --serif:"Noto Serif SC", "Songti SC", "STSong", serif;
+  --sans:"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --type:"Special Elite", "Courier New", monospace;
+  --mono:"IBM Plex Mono", "Courier New", monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:400;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* 纸张颗粒与旧化 */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.10'/%3E%3C/svg%3E");
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:59;
+  background:radial-gradient(ellipse at 50% 0%, rgba(255,250,235,.25), transparent 60%),
+             radial-gradient(ellipse at 50% 100%, rgba(90,60,20,.18), transparent 55%);
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+section{position:relative;padding:96px 0}
+.eyebrow{
+  font-family:var(--type);font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--red);margin-bottom:18px;display:flex;align-items:center;gap:14px;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule)}
+h2.title{
+  font-family:var(--serif);font-weight:900;font-size:clamp(1.7rem,4vw,2.7rem);
+  line-height:1.3;letter-spacing:.02em;margin-bottom:14px;
+}
+.lead{color:var(--ink-soft);font-size:1.02rem;max-width:640px;margin-bottom:48px;font-weight:300}
+.lead b{font-weight:600;color:var(--ink)}
+::selection{background:var(--red);color:var(--paper-3)}
+
+/* ============ 撕纸齿孔分隔 ============ */
+.perf{height:18px;background:
+  linear-gradient(135deg, transparent 8px, var(--paper) 8px) 0 0/18px 18px repeat-x,
+  linear-gradient(315deg, transparent 8px, var(--paper) 8px) 0 100%/18px 18px repeat-x;
+  position:relative;opacity:0}
+.tape-sep{height:26px;position:relative;display:flex;align-items:center;justify-content:center}
+.tape-sep::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px dashed rgba(38,32,25,.35)}
+.tape-sep span{
+  position:relative;background:var(--paper);padding:0 18px;font-family:var(--type);
+  font-size:.72rem;letter-spacing:.4em;color:var(--ink-faint);
+}
+
+/* ============ 报头 ============ */
+.masthead{padding:64px 0 0;text-align:center}
+.masthead .org{
+  font-family:var(--serif);font-weight:900;font-size:clamp(2.1rem,6vw,3.6rem);letter-spacing:.12em;
+}
+.masthead .org-en{
+  font-family:var(--type);font-size:clamp(.72rem,1.8vw,.95rem);letter-spacing:.42em;
+  margin-top:8px;color:var(--ink-soft);
+}
+.masthead .rules{margin:26px auto 0;max-width:760px}
+.masthead .rules .r1{border-top:3px double var(--ink)}
+.masthead .rules .r2{border-top:1px solid var(--ink);margin-top:4px}
+.masthead .meta{
+  display:flex;justify-content:space-between;gap:12px;max-width:760px;margin:10px auto 0;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--ink-soft);
+  text-transform:uppercase;flex-wrap:wrap;
+}
+
+/* ============ HERO 电报纸 ============ */
+.hero{padding-top:56px;padding-bottom:84px}
+.telegram{
+  margin-top:44px;background:var(--paper-3);
+  border:1px solid rgba(38,32,25,.35);
+  box-shadow:0 1px 0 rgba(38,32,25,.15), 0 24px 50px -28px rgba(60,40,10,.55),
+             inset 0 0 60px rgba(150,120,60,.12);
+  padding:30px 34px 34px;position:relative;
+}
+.telegram::before{
+  content:"";position:absolute;inset:7px;border:1px solid rgba(38,32,25,.22);pointer-events:none;
+}
+.tg-head{
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;color:var(--ink-soft);
+  text-transform:uppercase;border-bottom:1px solid var(--rule);padding-bottom:14px;
+}
+.tg-head b{color:var(--red-deep);font-weight:600}
+.tg-label{
+  margin:22px 0 6px;font-family:var(--type);font-size:.82rem;letter-spacing:.28em;
+  color:var(--ink-soft);text-transform:uppercase;
+}
+/* 翻字牌 */
+.flip-row{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0 8px;perspective:1600px}
+.flip-card{
+  flex:1 1 150px;min-width:130px;height:118px;position:relative;cursor:pointer;
+}
+.flip-inner{
+  position:absolute;inset:0;transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.6,.05,.2,1);
+}
+.flip-card.flipped .flip-inner{transform:rotateX(180deg)}
+.flip-face{
+  position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border:1px solid rgba(38,32,25,.4);
+  background:repeating-linear-gradient(0deg, transparent 0 25px, rgba(38,32,25,.05) 25px 26px), var(--paper-card);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  box-shadow:0 6px 14px -10px rgba(60,40,10,.6);
+}
+.flip-face.back{transform:rotateX(180deg);background:var(--ink);border-color:var(--ink)}
+.flip-face .num{
+  position:absolute;top:5px;left:8px;font-family:var(--mono);font-size:.62rem;
+  letter-spacing:.2em;color:var(--ink-faint);
+}
+.flip-face.back .num{color:rgba(242,234,211,.45)}
+.flip-face .zh{font-family:var(--serif);font-weight:900;font-size:2.5rem;line-height:1.1;color:var(--ink)}
+.flip-face .py{font-family:var(--mono);font-size:.66rem;letter-spacing:.24em;color:var(--red);text-transform:lowercase}
+.flip-face.back .en{
+  font-family:var(--mono);font-weight:600;font-size:1.12rem;letter-spacing:.1em;
+  color:var(--paper-3);text-align:center;padding:0 10px;text-transform:uppercase;line-height:1.35;
+}
+.flip-face.back .tag{font-family:var(--type);font-size:.62rem;letter-spacing:.3em;color:#d8a23c;margin-top:5px}
+.flip-hint{font-family:var(--type);font-size:.74rem;letter-spacing:.2em;color:var(--ink-faint);margin-top:6px}
+/* 电键 */
+.key-area{display:flex;align-items:center;gap:26px;margin-top:30px;flex-wrap:wrap}
+.tg-key{
+  appearance:none;border:none;background:none;cursor:pointer;display:flex;align-items:center;gap:16px;
+  padding:10px 18px 10px 10px;border:1px solid var(--ink);background:var(--paper-3);
+  font-family:var(--type);color:var(--ink);transition:transform .12s, background .2s;
+}
+.tg-key:hover{background:#fff6e2}
+.tg-key:active{transform:translateY(2px)}
+.tg-key:focus-visible{outline:2px dashed var(--red);outline-offset:3px}
+.key-base{
+  width:64px;height:34px;background:linear-gradient(180deg,#3a3128,#211b14);border-radius:5px;
+  position:relative;display:flex;justify-content:center;align-items:flex-start;padding-top:5px;
+  box-shadow:0 5px 0 #17120c, 0 8px 12px rgba(0,0,0,.35);transition:box-shadow .1s, transform .1s;
+}
+.tg-key:active .key-base{box-shadow:0 2px 0 #17120c,0 4px 7px rgba(0,0,0,.3);transform:translateY(3px)}
+.key-knob{
+  width:26px;height:13px;background:linear-gradient(180deg,#cf5a4a,var(--red-deep));border-radius:50% 50% 4px 4px;
+}
+.key-text{text-align:left;line-height:1.5;display:inline-block}
+.key-text .k1{font-size:.95rem;letter-spacing:.2em}
+.key-text .k2{font-size:.66rem;letter-spacing:.3em;color:var(--ink-faint)}
+.mode-state{font-family:var(--mono);font-size:.74rem;letter-spacing:.18em;color:var(--ink-soft)}
+.mode-state b{color:var(--red);font-weight:600}
+/* 印章 */
+.stamp{
+  position:absolute;right:26px;bottom:26px;width:96px;height:96px;border:3px solid var(--red);
+  border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:var(--red);transform:rotate(-12deg);opacity:.82;pointer-events:none;
+  font-family:var(--serif);font-weight:900;
+}
+.stamp::before{content:"";position:absolute;inset:5px;border:1px solid var(--red);border-radius:50%}
+.stamp .s1{font-size:1.7rem;letter-spacing:.1em;line-height:1}
+.stamp .s2{font-family:var(--type);font-size:.52rem;letter-spacing:.24em;margin-top:5px}
+.stamp.market{border-color:var(--red);color:var(--red);transform:rotate(8deg) scale(1.04)}
+.hero-note{text-align:center;margin-top:30px;font-family:var(--serif);color:var(--ink-soft);font-size:.95rem;letter-spacing:.08em}
+.hero-note span{color:var(--red)}
+
+/* ============ 译码本 ============ */
+.dict-row{
+  display:grid;grid-template-columns:170px 1fr;gap:28px;padding:34px 0;
+  border-bottom:1px dashed var(--rule);align-items:start;
+}
+.dict-row:first-of-type{border-top:1px dashed var(--rule)}
+.dict-word{position:sticky;top:10px}
+.dict-word .w{font-family:var(--serif);font-weight:900;font-size:3rem;line-height:1;color:var(--red-deep)}
+.dict-word .p{font-family:var(--mono);font-size:.72rem;letter-spacing:.26em;color:var(--ink-faint);margin-top:8px}
+.dict-word .e{font-family:var(--type);font-size:.82rem;color:var(--ink-soft);margin-top:3px}
+.dict-read{padding-left:26px;border-left:3px double var(--rule)}
+.dict-read p{margin-bottom:10px;font-size:.98rem;font-weight:300}
+.dict-read p:last-child{margin-bottom:0}
+.dict-read .tag{
+  display:inline-block;font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;
+  border:1px solid var(--rule);padding:1px 9px;margin-right:10px;color:var(--ink-soft);
+  text-transform:uppercase;vertical-align:2px;
+}
+.dict-read .tag.heart{color:var(--red);border-color:var(--red)}
+.plate{margin-top:56px;position:relative}
+.plate img{
+  width:100%;display:block;border:10px solid var(--paper-3);
+  box-shadow:0 24px 50px -26px rgba(60,40,10,.6);filter:sepia(.18) contrast(1.02);
+}
+.plate figcaption{
+  position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);
+  background:var(--ink);color:var(--paper-3);font-family:var(--type);font-size:.74rem;
+  letter-spacing:.26em;padding:7px 22px;white-space:nowrap;text-transform:uppercase;
+}
+
+/* ============ 行情板 ============ */
+.market{background:linear-gradient(180deg, var(--paper-2), var(--paper))}
+/* 行情纸带 */
+.ticker{
+  overflow:hidden;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  background:var(--paper-3);padding:11px 0;margin:0 0 54px;position:relative;
+}
+.ticker-track{display:flex;width:max-content;animation:tick 36s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-item{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;white-space:nowrap;
+  padding:0 26px;color:var(--ink);
+}
+.ticker-item .up{color:var(--red);font-weight:600}
+.ticker-item .dot{color:var(--ink-faint);margin:0 4px}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* 数字卡 */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:52px}
+.stat{
+  background:var(--paper-3);border:1px solid rgba(38,32,25,.3);padding:22px 20px 18px;
+  position:relative;box-shadow:0 10px 24px -18px rgba(60,40,10,.7);
+}
+.stat::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red)}
+.stat .v{font-family:var(--mono);font-weight:600;font-size:clamp(1.4rem,2.6vw,1.9rem);color:var(--red-deep);line-height:1.2}
+.stat .l{font-size:.82rem;color:var(--ink-soft);margin-top:9px;font-weight:300;line-height:1.55}
+.stat .s{font-family:var(--type);font-size:.62rem;letter-spacing:.18em;color:var(--ink-faint);margin-top:8px;display:block}
+#priceChart{width:100%;height:380px;background:var(--paper-3);border:1px solid rgba(38,32,25,.3)}
+.chart-note{font-family:var(--type);font-size:.68rem;color:var(--ink-faint);letter-spacing:.1em;margin-top:10px}
+/* 传导链 */
+.chain{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:60px;counter-reset:step}
+.chain-step{position:relative;padding:0 22px;text-align:center}
+.chain-step::after{
+  content:"→";position:absolute;right:-9px;top:6px;font-family:var(--mono);
+  color:var(--red);font-size:1.2rem;z-index:2;
+}
+.chain-step:last-child::after{display:none}
+.chain-dot{
+  width:36px;height:36px;border:2px solid var(--red);border-radius:50%;margin:0 auto 14px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);
+  font-weight:600;font-size:.86rem;color:var(--red);background:var(--paper);
+}
+.chain-step h4{font-family:var(--serif);font-weight:900;font-size:1.02rem;margin-bottom:7px}
+.chain-step p{font-size:.82rem;color:var(--ink-soft);font-weight:300;line-height:1.65}
+.red-note{
+  margin-top:52px;background:var(--ink);color:var(--paper-3);padding:40px 30px 26px;
+  font-family:var(--serif);font-size:1.02rem;line-height:1.9;position:relative;
+}
+.red-note::before{
+  content:"注";position:absolute;top:-13px;left:26px;background:var(--red);color:var(--paper-3);
+  font-family:var(--type);font-size:.74rem;letter-spacing:.3em;padding:3px 14px;
+}
+.red-note b{color:#e06a5c;font-weight:600}
+
+/* ============ 两份账单 ============ */
+.ledger-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.ledger{
+  background:var(--paper-3);border:1px solid rgba(38,32,25,.3);padding:30px 30px 26px;
+  box-shadow:0 18px 40px -28px rgba(60,40,10,.7);position:relative;
+}
+.ledger.dark{background:var(--ink);color:var(--paper-3);border-color:var(--ink)}
+.ledger h3{
+  font-family:var(--type);font-size:.92rem;letter-spacing:.24em;text-transform:uppercase;
+  padding-bottom:14px;border-bottom:3px double var(--rule);margin-bottom:8px;
+}
+.ledger.dark h3{border-color:rgba(242,234,211,.4)}
+.ledger h3 small{display:block;font-family:var(--sans);letter-spacing:.06em;font-size:.78rem;color:var(--ink-faint);margin-top:5px;text-transform:none}
+.ledger.dark h3 small{color:rgba(242,234,211,.5)}
+.lg-row{
+  display:flex;align-items:baseline;gap:10px;padding:13px 0;font-size:.88rem;font-weight:300;
+  border-bottom:1px dotted var(--rule);
+}
+.ledger.dark .lg-row{border-color:rgba(242,234,211,.25)}
+.lg-row .name{flex-shrink:0}
+.lg-row .lead-dots{flex:1;border-bottom:1px dotted var(--ink-faint);transform:translateY(-4px)}
+.ledger.dark .lg-row .lead-dots{border-color:rgba(242,234,211,.35)}
+.lg-row .val{font-family:var(--mono);font-size:.82rem;white-space:nowrap;color:var(--red-deep);font-weight:600}
+.ledger.dark .lg-row .val{color:#e06a5c}
+.lg-total{
+  display:flex;justify-content:space-between;margin-top:18px;font-family:var(--serif);
+  font-weight:900;font-size:1.06rem;
+}
+.lg-total em{font-style:normal;color:var(--red)}
+.ledger.dark .lg-total em{color:#e06a5c}
+
+/* ============ 寄存处 ============ */
+.vault{background:linear-gradient(180deg, var(--paper), var(--paper-2))}
+.vault-form{
+  display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap;
+}
+.vault-form input{
+  flex:1;min-width:240px;padding:15px 18px;border:1px solid rgba(38,32,25,.45);
+  background:var(--paper-3);font-family:var(--sans);font-size:.95rem;color:var(--ink);
+}
+.vault-form input:focus{outline:2px dashed var(--red);outline-offset:1px}
+.vault-form button{
+  padding:0 26px;border:1px solid var(--red-deep);background:var(--red);color:var(--paper-3);
+  font-family:var(--type);font-size:.86rem;letter-spacing:.24em;cursor:pointer;
+  transition:background .2s;
+}
+.vault-form button:hover{background:var(--red-deep)}
+.vault-form button:focus-visible{outline:2px dashed var(--ink);outline-offset:3px}
+.vault-promise{font-size:.82rem;color:var(--ink-soft);font-weight:300;margin-bottom:34px}
+.vault-promise b{color:var(--red-deep);font-weight:600}
+.slip-board{display:flex;flex-wrap:wrap;gap:20px}
+.slip{
+  width:calc(33.333% - 14px);min-width:230px;background:var(--paper-3);
+  border:1px solid rgba(38,32,25,.25);padding:20px 20px 16px;position:relative;
+  box-shadow:0 14px 26px -18px rgba(60,40,10,.7);
+}
+.slip:nth-child(3n+1){transform:rotate(-1.3deg)}
+.slip:nth-child(3n+2){transform:rotate(.8deg)}
+.slip:nth-child(3n){transform:rotate(-.4deg)}
+.slip .date{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;color:var(--red);
+  border:1px solid var(--red);display:inline-block;padding:2px 9px;margin-bottom:12px;
+}
+.slip .txt{font-family:var(--serif);font-size:.96rem;line-height:1.8;font-weight:400}
+.slip .del{
+  position:absolute;top:8px;right:10px;border:none;background:none;cursor:pointer;
+  font-family:var(--mono);font-size:.9rem;color:var(--ink-faint);line-height:1;padding:4px;
+}
+.slip .del:hover{color:var(--red)}
+.slip .demo-tag{
+  position:absolute;bottom:10px;right:12px;font-family:var(--type);font-size:.58rem;
+  letter-spacing:.24em;color:var(--ink-faint);
+}
+.vault-empty{
+  border:2px dashed var(--rule);padding:44px;text-align:center;width:100%;
+  font-family:var(--serif);color:var(--ink-soft);font-size:.98rem;
+}
+
+/* ============ 页脚 ============ */
+footer{padding:80px 0 64px;text-align:center;background:var(--paper-2)}
+.footer-msg{font-family:var(--serif);font-weight:900;font-size:clamp(1.5rem,4.4vw,2.6rem);line-height:1.5}
+.footer-msg .en2{display:block;font-family:var(--mono);font-weight:600;font-size:clamp(.72rem,1.9vw,1rem);letter-spacing:.18em;color:var(--red-deep);margin-top:14px}
+.footer-stamp{
+  width:120px;height:120px;border:3px solid var(--red);border-radius:50%;margin:40px auto 30px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--red);
+  transform:rotate(-8deg);position:relative;
+}
+.footer-stamp::before{content:"";position:absolute;inset:6px;border:1px solid var(--red);border-radius:50%}
+.footer-stamp .f1{font-family:var(--serif);font-weight:900;font-size:2.1rem}
+.footer-stamp .f2{font-family:var(--type);font-size:.56rem;letter-spacing:.26em;margin-top:4px}
+.colophon{
+  max-width:680px;margin:0 auto;font-size:.74rem;color:var(--ink-faint);font-weight:300;
+  line-height:1.9;border-top:1px solid var(--rule);padding-top:26px;
+}
+.colophon .bureau{font-family:var(--type);letter-spacing:.3em;margin-bottom:10px;color:var(--ink-soft)}
+
+/* ============ 滚动揭示 ============ */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+
+/* ============ 响应式 ============ */
+@media (max-width:900px){
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .chain{grid-template-columns:repeat(2,1fr);gap:34px 8px}
+  .chain-step::after{display:none}
+  .slip{width:calc(50% - 10px)}
+}
+@media (max-width:680px){
+  section{padding:70px 0}
+  .wrap{padding:0 18px}
+  .telegram{padding:22px 18px 26px}
+  .stamp{width:78px;height:78px;position:relative;margin:24px auto 0;transform:none}
+  .stamp.market{transform:none}
+  .stamp .s1{font-size:1.3rem}
+  .vault-form input{font-size:16px}
+  .key-area{gap:16px}
+  .mode-state{width:100%}
+  .dict-row{grid-template-columns:1fr;gap:12px}
+  .dict-read{padding-left:0;border-left:none;border-top:1px solid var(--rule);padding-top:14px}
+  .dict-word{position:static}
+  .ledger-grid{grid-template-columns:1fr}
+  .slip-board{gap:14px}
+  .slip{width:100%;min-width:0}
+  .flip-card{flex:1 1 calc(50% - 12px);min-width:0;height:104px}
+  .flip-face .zh{font-size:2rem}
+  #priceChart{height:320px}
+  .plate figcaption{font-size:.6rem;letter-spacing:.14em;white-space:normal;width:88%;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker-track{animation:none}
+  .rv{opacity:1;transform:none;transition:none}
+  .flip-inner{transition-duration:.01s}
+}
+</style>
+</head>
+<body>
+<!-- ================= 报头 + HERO ================= -->
+<header class="masthead wrap">
+  <div class="org">记忆电报局</div>
+  <div class="org-en">MEMORY&nbsp;TELEGRAPH&nbsp;BUREAU</div>
+  <div class="rules"><div class="r1"></div><div class="r2"></div></div>
+  <div class="meta">
+    <span>编号 NO.0001-AI</span>
+    <span>发报地 SHENYANG</span>
+    <span id="tg-date">日期 ——</span>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <div class="telegram rv">
+    <div class="tg-head">
+      <span>报类 CLASS · <b id="tg-class">书信 PERSONAL</b></span>
+      <span>计费字数 WORDS · <b>10 / 6</b></span>
+      <span>投递 DELIVER · 心 / 市场</span>
+    </div>
+
+    <div class="tg-label">电文 MESSAGE —— 点击字牌或按动电键，切换译文</div>
+    <div class="flip-row" id="flipRow" aria-label="双关电文">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-face front"><span class="num">01</span><span class="zh">爱</span><span class="py">ài</span></div>
+        <div class="flip-face back"><span class="num">01</span><span class="en">AI</span><span class="tag">artificial intel.</span></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-face front"><span class="num">02</span><span class="zh">让</span><span class="py">ràng</span></div>
+        <div class="flip-face back"><span class="num">02</span><span class="en">HAS MADE</span><span class="tag">causative</span></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-face front"><span class="num">03</span><span class="zh">记忆</span><span class="py">jìyì</span></div>
+        <div class="flip-face back"><span class="num">03</span><span class="en">RAM</span><span class="tag">random memory</span></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-face front"><span class="num">04</span><span class="zh">变得更加</span><span class="py">gèngjiā</span></div>
+        <div class="flip-face back"><span class="num">04</span><span class="en">MORE</span><span class="tag">comparative</span></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-face front"><span class="num">05</span><span class="zh">珍贵</span><span class="py">zhēnguì</span></div>
+        <div class="flip-face back"><span class="num">05</span><span class="en">EXPENSIVE</span><span class="tag">market price</span></div>
+      </div></div>
+    </div>
+    <div class="flip-hint">正面：爱让记忆变得更加珍贵　·　背面：AI HAS MADE RAM MORE EXPENSIVE</div>
+
+    <div class="key-area">
+      <button class="tg-key" id="tgKey" type="button" aria-pressed="false">
+        <span class="key-base"><span class="key-knob"></span></span>
+        <span class="key-text">
+          <span class="k1">按动电键</span><br>
+          <span class="k2">TRANSLATE</span>
+        </span>
+      </button>
+      <span class="mode-state">当前译文 CURRENT READING：<b id="modeLabel">情书 LOVE LETTER</b></span>
+    </div>
+
+    <div class="stamp" id="tgStamp"><span class="s1">无价</span><span class="s2">PRICELESS</span></div>
+  </div>
+  <p class="hero-note">一封电报，两种读法 —— 同一句话，说给心听是<span>情诗</span>，说给市场听是<span>头条</span>。</p>
+</section>
+
+<div class="tape-sep"><span>撕 开 译 码 · TEAR TO DECODE</span></div>
+
+<!-- ================= 〇一 译码本 ================= -->
+<section class="wrap">
+  <div class="eyebrow">〇一 · 译码本 CODEBOOK</div>
+  <h2 class="title rv">同一份电文，为什么有两种译法</h2>
+  <p class="lead rv">中文把两件事藏进了同一串音节里：<b>“爱”与 AI 同音，“记忆”既是回忆也是内存，“珍贵”既是无价，也可以是有价</b>。翻过电报背面，情书就成了行情。</p>
+
+  <div class="dict-row rv">
+    <div class="dict-word"><div class="w">爱</div><div class="p">ÀI</div><div class="e">love</div></div>
+    <div class="dict-read">
+      <p><span class="tag heart">情感频道</span>爱，是对一个人、一段时光、一种生活的偏爱。它让平凡的瞬间被反复想起。</p>
+      <p><span class="tag">资本频道</span>它的读音恰好是 <b>AI</b>——人工智能。数据中心、大模型、算力军备竞赛的那个 AI。</p>
+    </div>
+  </div>
+
+  <div class="dict-row rv">
+    <div class="dict-word"><div class="w">记忆</div><div class="p">JÌYÌ</div><div class="e">memory / RAM</div></div>
+    <div class="dict-read">
+      <p><span class="tag heart">情感频道</span>记忆会泛黄、会褪色、会在某个深夜突然清晰，是一个人之所以是他自己的全部存证。</p>
+      <p><span class="tag">资本频道</span>机器的记忆叫 <b>RAM</b>（内存）与闪存。AI 模型越大，吞掉的内存越多，晶圆产能越紧张。</p>
+    </div>
+  </div>
+
+  <div class="dict-row rv">
+    <div class="dict-word"><div class="w">珍贵</div><div class="p">ZHĒNGUÌ</div><div class="e">precious / expensive</div></div>
+    <div class="dict-read">
+      <p><span class="tag heart">情感频道</span>无法标价、不能复制、失去了就再也买不回的，称为珍贵——比如一张旧照片背面的日期。</p>
+      <p><span class="tag">资本频道</span>一旦可以标价，它就有了行情名：<b>expensive</b>。2025 年之后，内存条完全配得上这个词。</p>
+    </div>
+  </div>
+
+  <figure class="plate rv">
+    <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/VocTbOdscojIBWxDAg4cAHYBnpd" alt="左侧手写信、干玫瑰与褪色照片，右侧一根 DDR5 内存条，中间由撕开的行情纸带相连">
+    <figcaption>左：会泛黄的记忆　·　右：会涨价的记忆</figcaption>
+  </figure>
+</section>
+
+<div class="tape-sep"><span>行 情 在 背 面 · MARKET OVERLEAF</span></div>
+
+<!-- ================= 〇二 行情板 ================= -->
+<section class="market">
+  <div class="wrap">
+    <div class="eyebrow">〇二 · 行情板 MARKET BOARD</div>
+    <h2 class="title rv">AI 真的让 RAM 变贵了</h2>
+    <p class="lead rv">这不是文字游戏。2025 年起，AI 数据中心抢购高带宽内存（HBM），产能被大量抽走，消费级 DDR5/DDR4 跟着一路飙升——<b>涨幅一度超过同期黄金</b>。</p>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <div class="wrap">
+    <div class="stat-grid">
+      <div class="stat rv"><div class="v">+171.8%</div><div class="l">2025 年第三季度 DRAM 合约价同比涨幅</div><span class="s">来源 TRENDFORCE / 证券时报</span></div>
+      <div class="stat rv"><div class="v">+64%</div><div class="l">2025 下半年服务器 DRAM 合约价累计涨幅</div><span class="s">来源 TRENDFORCE</span></div>
+      <div class="stat rv"><div class="v">≈ 4.9×</div><div class="l">2026 年中主流 DDR5 零售价约为 2025 年 7 月的倍数</div><span class="s">来源 3D CENTER 零售追踪</span></div>
+      <div class="stat rv"><div class="v">$100→$400</div><div class="l">32GB DDR5 套条，2025 年 5 月至 12 月</div><span class="s">来源 NPR 报道转引</span></div>
+    </div>
+
+    <div class="rv" id="priceChart" role="img" aria-label="消费级 DDR5 内存价格指数走势图，2025年7月为100，至2026年8月升至约486"></div>
+    <div class="chart-note">指数 INDEX：2025 年 7 月 = 100，综合 NPR、3D Center 及公开报道的零售口径近似整理；无圆点月份为趋势示意，圆点为有公开报道锚点。</div>
+
+    <div class="chain">
+      <div class="chain-step rv"><div class="chain-dot">1</div><h4>AI 爆发</h4><p>大模型训练与推理需要海量内存，云厂商数据中心连年扩建。</p></div>
+      <div class="chain-step rv"><div class="chain-dot">2</div><h4>HBM 吃掉产能</h4><p>HBM3e 一度比服务器 DDR5 贵 4–5 倍，晶圆产能优先向它倾斜。</p></div>
+      <div class="chain-step rv"><div class="chain-dot">3</div><h4>普通内存缺货</h4><p>DDR5/DDR4 产能被挤压，供应商季度报价上调 18%–98% 不等。</p></div>
+      <div class="chain-step rv"><div class="chain-dot">4</div><h4>消费者买单</h4><p>内存条、显卡、手机、笔记本电脑全面变贵，短缺或持续多年。</p></div>
+    </div>
+
+    <div class="red-note rv">
+      在东方的行情屏上，<b>红色代表上涨</b>。于是这件事有了奇妙的巧合：<b>爱的颜色，恰好也是涨价的颜色</b>——同一种红，盖在情书的落款上，也印在一路飘红的内存报价单上。
+    </div>
+  </div>
+</section>
+
+<div class="tape-sep"><span>请 核 对 账 目 · RECKONING</span></div>
+
+<!-- ================= 〇三 两份账单 ================= -->
+<section class="wrap">
+  <div class="eyebrow">〇三 · 对账 TWO LEDGERS</div>
+  <h2 class="title rv">能标价的记忆，与不能标价的记忆</h2>
+  <p class="lead rv">机器的记忆随行就市，越存越贵；人的记忆无法计提折旧，越久越不敢估价。两本账并排放在这里，请自行核对。</p>
+
+  <div class="ledger-grid">
+    <div class="ledger rv">
+      <h3>机器的记忆<small>THE MACHINE'S MEMORY · 可计价 PRICED</small></h3>
+      <div class="lg-row"><span class="name">32GB DDR5 套条 · 2025年5月</span><span class="lead-dots"></span><span class="val">$100</span></div>
+      <div class="lg-row"><span class="name">同一套条 · 2025年12月</span><span class="lead-dots"></span><span class="val">$400</span></div>
+      <div class="lg-row"><span class="name">2×32GB DDR5-5600 · 2026年1月</span><span class="lead-dots"></span><span class="val">€677</span></div>
+      <div class="lg-row"><span class="name">256GB DDR5-6400 RECC 服务器条</span><span class="lead-dots"></span><span class="val">≈¥60,000</span></div>
+      <div class="lg-row"><span class="name">20 款主流 DDR5 较 2025年7月均价</span><span class="lead-dots"></span><span class="val">+340%</span></div>
+      <div class="lg-total"><span>合计 BALANCE</span><em>持续看涨 BULLISH</em></div>
+    </div>
+
+    <div class="ledger dark rv">
+      <h3>人的记忆<small>THE HUMAN'S MEMORY · 不可计价 PRICELESS</small></h3>
+      <div class="lg-row"><span class="name">外婆在厨房喊你全名的声音</span><span class="lead-dots"></span><span class="val">无价</span></div>
+      <div class="lg-row"><span class="name">久别重逢时那句“你一点没变”</span><span class="lead-dots"></span><span class="val">无价</span></div>
+      <div class="lg-row"><span class="name">旧照片背面已经褪色的日期</span><span class="lead-dots"></span><span class="val">无价</span></div>
+      <div class="lg-row"><span class="name">分手前最后一次并肩走的夜路</span><span class="lead-dots"></span><span class="val">无价</span></div>
+      <div class="lg-row"><span class="name">深夜收到的那两个字“晚安”</span><span class="lead-dots"></span><span class="val">无价</span></div>
+      <div class="lg-total"><span>合计 BALANCE</span><em>无从标价 NO QUOTE</em></div>
+    </div>
+  </div>
+</section>
+
+<div class="tape-sep"><span>代 收 代 存 · VAULT</span></div>
+
+<!-- ================= 〇四 寄存处 ================= -->
+<section class="vault">
+  <div class="wrap">
+    <div class="eyebrow">〇四 · 寄存处 MEMORY VAULT</div>
+    <h2 class="title rv">把一条记忆，存在行情之外</h2>
+    <p class="lead rv">下面写下的每条记忆，只保存在<b>你这台设备的浏览器里</b>（localStorage）：不经过云、不喂给模型、不产生报价、不会被任何数据中心买走。</p>
+
+    <form class="vault-form rv" id="vaultForm">
+      <input id="vaultInput" type="text" maxlength="60" placeholder="例如：2019 年夏天，和朋友在海边等到的那场日出……" aria-label="写下一条记忆">
+      <button type="submit">封存 SEAL</button>
+    </form>
+    <p class="vault-promise rv">AI 可以买光世界上的内存，但只要你不发出去，它就读不到这里。<b>这是行情无法抵达的地方。</b></p>
+
+    <div class="slip-board" id="slipBoard"></div>
+  </div>
+</section>
+
+<!-- ================= 页脚 ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-msg">
+      爱让记忆变得更加珍贵
+      <span class="en2">AI HAS MADE RAM MORE EXPENSIVE</span>
+    </div>
+    <div class="footer-stamp"><span class="f1">无价</span><span class="f2">PRICELESS</span></div>
+    <div class="colophon">
+      <div class="bureau">记忆电报局 · MEMORY TELEGRAPH BUREAU</div>
+      一封电文，两种读法。行情数据来源：TrendForce 集邦咨询、NPR、3D Center、证券时报、中国经济网、虎嗅等公开报道（2025–2026），市场价格随时间波动，页面数字为近似值，不构成任何投资建议。<br>
+      你在寄存处写下的内容从不离开本机。
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- 日期 ---------- */
+  function pad(n){return (n<10?"0":"")+n;}
+  var now = new Date();
+  var dateStr = now.getFullYear()+"."+pad(now.getMonth()+1)+"."+pad(now.getDate());
+  document.getElementById("tg-date").textContent = "日期 DATE · "+dateStr;
+
+  /* ---------- 电键翻字 ---------- */
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".flip-card"));
+  var keyBtn = document.getElementById("tgKey");
+  var modeLabel = document.getElementById("modeLabel");
+  var tgClass = document.getElementById("tg-class");
+  var stamp = document.getElementById("tgStamp");
+  var market = false;
+
+  var audioCtx = null;
+  function clack(){
+    if(reduceMotion) return;
+    try{
+      if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+      var t = audioCtx.currentTime;
+      var osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+      osc.type = "square"; osc.frequency.setValueAtTime(1500,t);
+      osc.frequency.exponentialRampToValueAtTime(420,t+0.045);
+      gain.gain.setValueAtTime(0.12,t);
+      gain.gain.exponentialRampToValueAtTime(0.001,t+0.06);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(t); osc.stop(t+0.07);
+    }catch(e){/* 无声不影响功能 */}
+  }
+
+  function flip(){
+    market = !market;
+    clack();
+    cards.forEach(function(c,i){
+      c.style.transitionDelay = reduceMotion ? "0s" : (i*0.07)+"s";
+      c.classList.toggle("flipped", market);
+    });
+    setTimeout(function(){ cards.forEach(function(c){c.style.transitionDelay="";}); }, 700);
+    modeLabel.textContent = market ? "行情 MARKET REPORT" : "情书 LOVE LETTER";
+    tgClass.innerHTML = market ? "行情 <b style='color:#b8352a'>MARKET</b>" : "书信 PERSONAL";
+    keyBtn.setAttribute("aria-pressed", market ? "true" : "false");
+    if(market){
+      stamp.classList.add("market");
+      stamp.querySelector(".s1").textContent = "暴涨";
+      stamp.querySelector(".s2").textContent = "SURGING";
+    }else{
+      stamp.classList.remove("market");
+      stamp.querySelector(".s1").textContent = "无价";
+      stamp.querySelector(".s2").textContent = "PRICELESS";
+    }
+  }
+  keyBtn.addEventListener("click", flip);
+  cards.forEach(function(c){ c.addEventListener("click", flip); });
+
+  /* ---------- 行情纸带 ---------- */
+  var items = [
+    "2025Q3 DRAM 合约价同比 <span class='up'>+171.8%</span>",
+    "2025 下半年服务器 DRAM 累计 <span class='up'>+64%</span>",
+    "32GB DDR5 套条半年 <span class='up'>$100 → $400</span>",
+    "2026 年中 DDR5 零售价约为 2025 年 7 月的 <span class='up'>4.9 倍</span>",
+    "2025 年 9 月以来 DDR5 累计涨幅一度 <span class='up'>超 300%</span>",
+    "HBM3e 曾比服务器 DDR5 贵 <span class='up'>4–5 倍</span>",
+    "2026Q1 常规 DRAM 合约价环比 <span class='up'>+93%~98%</span>",
+    "内存涨幅一度 <span class='up'>超过同期黄金</span>"
+  ];
+  var track = document.getElementById("tickerTrack");
+  var html = items.map(function(t){return "<span class='ticker-item'>"+t+"<span class='dot'>◆</span></span>";}).join("");
+  track.innerHTML = html + html;
+
+  /* ---------- ECharts 行情图 ---------- */
+  var chartEl = document.getElementById("priceChart");
+  if(window.echarts){
+    var chart = echarts.init(chartEl, null, {renderer:"canvas"});
+    var months = ["2025-05","2025-07","2025-09","2025-12","2026-03","2026-07","2026-08"];
+    var values = [105,100,140,420,590,445,486];
+    var anchors = {0:"$100",1:"基准 100",3:"$400",4:"$560(预测)",5:"445",6:"486%"};
+    var ink = "#262019", red = "#b8352a";
+    chart.setOption({
+      animation: !reduceMotion,
+      animationDuration:900,
+      grid:{left:52,right:26,top:46,bottom:40},
+      tooltip:{
+        trigger:"axis",
+        backgroundColor:"#262019",borderColor:"#262019",
+        textStyle:{color:"#f2ead3",fontFamily:"IBM Plex Mono, Courier New, monospace",fontSize:11},
+        formatter:function(ps){
+          var p = ps[0];
+          return p.axisValue+"<br/>价格指数：<b style='color:#e06a5c'>"+p.data+"</b>"+
+                 (anchors[p.dataIndex] ? "<br/>锚点："+anchors[p.dataIndex] : "<br/>（趋势示意）");
+        }
+      },
+      xAxis:{
+        type:"category",data:months,boundaryGap:false,
+        axisLine:{lineStyle:{color:"rgba(38,32,25,.55)"}},
+        axisTick:{show:false},
+        axisLabel:{color:"rgba(38,32,25,.75)",fontFamily:"IBM Plex Mono, Courier New, monospace",fontSize:10}
+      },
+      yAxis:{
+        type:"value",min:0,max:650,
+        axisLine:{show:false},axisTick:{show:false},
+        axisLabel:{color:"rgba(38,32,25,.6)",fontFamily:"IBM Plex Mono, Courier New, monospace",fontSize:10},
+        splitLine:{lineStyle:{type:"dashed",color:"rgba(38,32,25,.14)"}}
+      },
+      series:[
+        {
+          name:"价格指数",type:"line",data:values,smooth:.25,symbol:"none",
+          lineStyle:{color:red,width:3},
+          areaStyle:{color:{type:"linear",x:0,y:0,x2:0,y2:1,colorStops:[
+            {offset:0,color:"rgba(184,53,42,.28)"},{offset:1,color:"rgba(184,53,42,.02)"}]}}
+        },
+        {
+          name:"锚点",type:"scatter",
+          data:values.map(function(v,i){
+            if(anchors[i]==null) return null;
+            return {value:v, label:{
+              show:true,position:"top",distance:9,
+              formatter:anchors[i],
+              color:"#8e281f",fontFamily:"IBM Plex Mono, Courier New, monospace",
+              fontSize:10,fontWeight:600
+            }};
+          }),
+          symbolSize:11,
+          itemStyle:{color:"#f2ead3",borderColor:red,borderWidth:3},
+          tooltip:{show:false},z:5
+        }
+      ]
+    });
+    window.addEventListener("resize",function(){chart.resize();});
+  }
+
+  /* ---------- 记忆寄存处（localStorage） ---------- */
+  var STORE_KEY = "mtb_memory_vault_v1";
+  var board = document.getElementById("slipBoard");
+  var form = document.getElementById("vaultForm");
+  var input = document.getElementById("vaultInput");
+
+  var seeds = [
+    {txt:"2019 年夏天，和朋友在海边等到的那场日出。", demo:true},
+    {txt:"爷爷教我骑自行车时，后座一直扶着的那只手。", demo:true}
+  ];
+  function load(){
+    try{
+      var raw = localStorage.getItem(STORE_KEY);
+      if(raw===null){ var init = seeds.map(function(s){return {txt:s.txt, date:"", demo:true};}); save(init); return init; }
+      return JSON.parse(raw) || [];
+    }catch(e){ return []; }
+  }
+  function save(list){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(list)); }catch(e){} }
+  function esc(s){ return s.replace(/[&<>"']/g, function(m){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]; }); }
+
+  function render(){
+    var list = load();
+    if(!list.length){
+      board.innerHTML = "<div class='vault-empty'>寄存处空着。幸好——还可以现在就存一条。</div>";
+      return;
+    }
+    board.innerHTML = list.map(function(m,i){
+      return "<div class='slip'>"+
+        "<button class='del' type='button' data-i='"+i+"' aria-label='删除这条记忆'>×</button>"+
+        "<span class='date'>"+(m.date||"——")+"</span>"+
+        "<div class='txt'>"+esc(m.txt)+"</div>"+
+        (m.demo ? "<span class='demo-tag'>示例 SAMPLE</span>" : "")+
+      "</div>";
+    }).join("");
+    board.querySelectorAll(".del").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var l = load(); l.splice(+btn.getAttribute("data-i"),1); save(l); render();
+      });
+    });
+  }
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var v = input.value.trim();
+    if(!v){ input.focus(); return; }
+    var l = load();
+    l.unshift({txt:v.slice(0,60), date:dateStr, demo:false});
+    save(l); input.value=""; render();
+  });
+  render();
+
+  /* ---------- 滚动揭示 ---------- */
+  if("IntersectionObserver" in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target);} });
+    },{threshold:.12});
+    document.querySelectorAll(".rv").forEach(function(el){io.observe(el);});
+  }else{
+    document.querySelectorAll(".rv").forEach(function(el){el.classList.add("in");});
+  }
+})();
+</script>
+</body>
+</html>

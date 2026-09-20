@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>爱让记忆变得更加珍贵 · AI has made RAM more expensive</title>
+<meta name="description" content="一句中文，两种读法：人类读到情话，机器读到账单。关于记忆、内存与涨价的一次叙事实验。">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="scrollbar" aria-hidden="true"><i id="scrollFill"></i></div>
+
+<nav class="sidenav" aria-label="章节导航">
+  <ol>
+    <li><a href="#hero" data-dot="0"><span>序</span></a></li>
+    <li><a href="#pun" data-dot="1"><span>双关</span></a></li>
+    <li><a href="#chronicle" data-dot="2"><span>编年史</span></a></li>
+    <li><a href="#appetite" data-dot="3"><span>胃口</span></a></li>
+    <li><a href="#pawn" data-dot="4"><span>典当行</span></a></li>
+    <li><a href="#exchange" data-dot="5"><span>交换</span></a></li>
+    <li><a href="#letter" data-dot="6"><span>情书</span></a></li>
+  </ol>
+</nav>
+
+<!-- ============ 0 · HERO ============ -->
+<header class="hero" id="hero">
+  <div class="hero-inner">
+
+    <p class="eyebrow"><i class="dot"></i>MEMORY&nbsp;/&nbsp;&nbsp;记忆体&nbsp;&nbsp;·&nbsp;&nbsp;一份关于涨价的档案</p>
+
+    <h1 class="title">
+      <span class="t-line"><span class="ch ch-ai" data-h="爱" data-m="AI">爱</span><span class="ch" data-h="让" data-m="让">让</span><span class="ch ch-mem" data-h="记忆" data-m="RAM">记忆</span></span><br>
+      <span class="t-line"><span class="ch" data-h="变得" data-m="变得">变得</span><span class="ch ch-cost" data-h="更加" data-m="更加">更加</span><span class="ch ch-cost2" data-h="珍贵" data-m="昂贵">珍贵</span></span>
+    </h1>
+
+    <p class="title-en">AI&nbsp;has&nbsp;made&nbsp;RAM&nbsp;more&nbsp;expensive</p>
+
+    <p class="tagline">
+      同一个句子，人类读到情话，机器读到账单。<br>
+      <span class="muted">你舍不得删的那张照片，和服务器舍不得释放的那块显存，如今按同一个单位计价。</span>
+    </p>
+
+    <div class="ticker" role="group" aria-label="示意行情">
+      <div class="ticker-row">
+        <span class="ticker-label">DDR5 16GB 套装 · 示意均价</span>
+        <span class="ticker-val" id="priceVal">¥&thinsp;1 176.00</span>
+        <span class="ticker-up" id="priceUp">▲ 0.00%</span>
+      </div>
+      <div class="ticker-bar"><i id="priceFill"></i></div>
+      <p class="ticker-note">
+        数字每秒都在动。<span class="warn">本页所有价格、规格、用量均为叙事用示意数据，非真实报价，不构成任何购买或投资参考。</span>
+      </p>
+    </div>
+
+    <div class="stick-wrap" aria-hidden="true">
+      <svg class="stick" viewBox="0 0 620 96" role="img" aria-label="一根正在被填满的内存条">
+        <rect class="pcb" x="4" y="22" width="612" height="52" rx="5"/>
+        <g class="chips">
+          <rect class="chip" x="24"  y="30" width="60" height="36" rx="3"/>
+          <rect class="chip" x="96"  y="30" width="60" height="36" rx="3"/>
+          <rect class="chip" x="168" y="30" width="60" height="36" rx="3"/>
+          <rect class="chip" x="240" y="30" width="60" height="36" rx="3"/>
+          <rect class="chip" x="312" y="30" width="60" height="36" rx="3"/>
+          <rect class="chip" x="384" y="30" width="60" height="36" rx="3"/>
+          <rect class="chip" x="456" y="30" width="60" height="36" rx="3"/>
+          <rect class="chip" x="528" y="30" width="60" height="36" rx="3"/>
+        </g>
+        <g class="pins">
+          <rect x="24" y="78" width="552" height="4" rx="2"/>
+        </g>
+        <text class="stick-txt" x="8" y="16">DIMM · 正在写入你的回忆</text>
+        <text class="stick-pct" x="612" y="16" text-anchor="end" id="stickPct">0%</text>
+      </svg>
+    </div>
+
+    <p class="scroll-hint">向下滚动，把回忆一条条写进去 <i class="arrow"></i></p>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 1 · 双关 ============ -->
+<section class="sec" id="pun">
+  <div class="wrap">
+    <p class="sec-no">01</p>
+    <h2 class="sec-title">一句话，两套账本</h2>
+    <p class="sec-sub">点击开关，切换这句话的读法。词义没变，计量单位变了。</p>
+
+    <div class="reader">
+      <span class="reader-side is-on" data-mode="human">人类读法</span>
+      <button class="switch" id="modeSwitch" role="switch" aria-checked="false" aria-label="切换人类读法与机器读法">
+        <i></i>
+      </button>
+      <span class="reader-side" data-mode="machine">机器读法</span>
+    </div>
+
+    <div class="pun-grid">
+      <article class="pun-card" data-tag-h="爱 · 心动" data-tag-m="AI · 算力">
+        <p class="pun-tag">爱 · 心动</p>
+        <p class="pun-word" data-h="爱" data-m="AI">爱</p>
+        <p class="pun-line" data-h="一种无法压缩的东西。" data-m="一种按 TFLOPS 计费的东西。">一种无法压缩的东西。</p>
+        <p class="pun-foot">
+          <span data-h="人类版" data-m="机器版">人类版</span>
+          <em data-h="心跳不占内存，但会让它变贵。" data-m="每一次推理，都要借走一片显存。">心跳不占内存，但会让它变贵。</em>
+        </p>
+      </article>
+
+      <article class="pun-card" data-tag-h="记忆 · 回忆" data-tag-m="RAM · 内存">
+        <p class="pun-tag">记忆 · 回忆</p>
+        <p class="pun-word ch-mem" data-h="记忆" data-m="RAM">记忆</p>
+        <p class="pun-line" data-h="那年夏天傍晚的空气。" data-m="8GB × 2，双面颗粒。">那年夏天傍晚的空气。</p>
+        <p class="pun-foot">
+          <span data-h="人类版" data-m="机器版">人类版</span>
+          <em data-h="丢掉一次，就是永久。" data-m="断电一次，就是永久。">丢掉一次，就是永久。</em>
+        </p>
+      </article>
+
+      <article class="pun-card" data-tag-h="珍贵 · 舍不得" data-tag-m="昂贵 · 买不起">
+        <p class="pun-tag">珍贵 · 舍不得</p>
+        <p class="pun-word ch-cost2" data-h="珍贵" data-m="昂贵">珍贵</p>
+        <p class="pun-line" data-h="舍不得删。" data-m="买不起。">舍不得删。</p>
+        <p class="pun-foot">
+          <span data-h="人类版" data-m="机器版">人类版</span>
+          <em data-h="越珍贵，越不该被标价。" data-m="越昂贵，越有人抢着囤。">越珍贵，越不该被标价。</em>
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 · 编年史 ============ -->
+<section class="sec sec-alt" id="chronicle">
+  <div class="wrap">
+    <p class="sec-no">02</p>
+    <h2 class="sec-title">涨价编年史</h2>
+    <p class="sec-sub">一条曲线，四个路口。人类开始怀念过去的那几年，因为那时候内存便宜得不像话。</p>
+
+    <figure class="chart">
+      <figcaption>DDR5 16GB 套装 · 示意均价走势（单位：元）<span class="badge">示意数据</span></figcaption>
+      <svg viewBox="0 0 900 340" class="linechart" role="img" aria-label="价格走势折线图">
+        <g class="grid">
+          <line x1="70" y1="40"  x2="860" y2="40"/>
+          <line x1="70" y1="110" x2="860" y2="110"/>
+          <line x1="70" y1="180" x2="860" y2="180"/>
+          <line x1="70" y1="250" x2="860" y2="250"/>
+          <text x="60" y="44"  text-anchor="end">1400</text>
+          <text x="60" y="114" text-anchor="end">1050</text>
+          <text x="60" y="184" text-anchor="end">700</text>
+          <text x="60" y="254" text-anchor="end">350</text>
+          <text x="60" y="300" text-anchor="end">0</text>
+          <line x1="70" y1="300" x2="860" y2="300" class="axis"/>
+        </g>
+        <path id="linePath" class="line" d="M 130 268 L 300 254 L 470 238 L 640 190 L 810 92"/>
+        <path id="areaPath" class="area" d="M 130 268 L 300 254 L 470 238 L 640 190 L 810 92 L 810 300 L 130 300 Z"/>
+        <g id="lineDots" class="dots">
+          <circle cx="130" cy="268" r="5"/><circle cx="300" cy="254" r="5"/>
+          <circle cx="470" cy="238" r="5"/><circle cx="640" cy="190" r="5"/>
+          <circle cx="810" cy="92"  r="5" class="hot"/>
+        </g>
+        <g class="xlab">
+          <text x="130" y="326" text-anchor="middle">2023</text>
+          <text x="300" y="326" text-anchor="middle">2024</text>
+          <text x="470" y="326" text-anchor="middle">2025 春</text>
+          <text x="640" y="326" text-anchor="middle">2025 冬</text>
+          <text x="810" y="326" text-anchor="middle">2026</text>
+        </g>
+        <g class="vlabel">
+          <text x="130" y="252" text-anchor="middle">¥320</text>
+          <text x="300" y="238" text-anchor="middle">¥450</text>
+          <text x="470" y="222" text-anchor="middle">¥560</text>
+          <text x="640" y="174" text-anchor="middle">¥820</text>
+          <text x="810" y="76"  text-anchor="middle" class="hot">¥1 176</text>
+        </g>
+      </svg>
+    </figure>
+
+    <ol class="tl">
+      <li class="tl-item">
+        <span class="tl-year">2023</span>
+        <div class="tl-body">
+          <h3>AI 还在写诗</h3>
+          <p>那时候它只会聊天，内存还在打折。装机的人把预算花在显卡上，内存随手买 32GB，像买白菜。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <span class="tl-year">2024</span>
+        <div class="tl-body">
+          <h3>显存开始不够用</h3>
+          <p>模型变大，显卡先撑不住。人们第一次听说「显存不够，用内存凑」，于是内存也不够了。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <span class="tl-year">2025</span>
+        <div class="tl-body">
+          <h3>产能转向</h3>
+          <p>原厂把产线让给了更高利润的产品，消费级颗粒开始告急。柜台上的价签，一周换三次。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <span class="tl-year">2026</span>
+        <div class="tl-body">
+          <h3>你想起柜子里那根 DDR4</h3>
+          <p>它被压在旧书下面，金手指氧化发暗。你吹了吹灰，忽然觉得它比新买的那根更珍贵——不是因为它值钱，是因为它记得。</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 3 · 胃口 ============ -->
+<section class="sec" id="appetite">
+  <div class="wrap">
+    <p class="sec-no">03</p>
+    <h2 class="sec-title">谁吃掉了我的内存</h2>
+    <p class="sec-sub">同一台机器上，住着两种「记得」。一种用 GB 计价，一种无法计价——可讽刺的是，占得最少的那个，你最舍不得。</p>
+
+    <ul class="bars" id="bars">
+      <li class="bar" data-w="100">
+        <p class="bar-k">大模型训练集群 · 中间态</p>
+        <div class="bar-track"><i class="bar-fill machine"></i></div>
+        <p class="bar-v">2.4 TB</p>
+      </li>
+      <li class="bar" data-w="62">
+        <p class="bar-k">700 亿参数模型 · 推理常驻</p>
+        <div class="bar-track"><i class="bar-fill machine"></i></div>
+        <p class="bar-v">140 GB</p>
+      </li>
+      <li class="bar" data-w="34">
+        <p class="bar-k">浏览器 · 你打开的 40 个标签页</p>
+        <div class="bar-track"><i class="bar-fill machine"></i></div>
+        <p class="bar-v">6.2 GB</p>
+      </li>
+      <li class="bar" data-w="18">
+        <p class="bar-k">一整年的聊天记录</p>
+        <div class="bar-track"><i class="bar-fill human"></i></div>
+        <p class="bar-v">0.4 GB</p>
+      </li>
+      <li class="bar" data-w="11">
+        <p class="bar-k">那年夏天的 327 张照片</p>
+        <div class="bar-track"><i class="bar-fill human"></i></div>
+        <p class="bar-v">1.8 GB</p>
+      </li>
+      <li class="bar bar-last" data-w="4">
+        <p class="bar-k">一句「我记得你」</p>
+        <div class="bar-track"><i class="bar-fill love"></i></div>
+        <p class="bar-v">0.000000012 GB</p>
+      </li>
+    </ul>
+
+    <p class="pull">
+      最贵的那一行，装着别人的算力。<br>
+      最便宜的那一行，装着你的一生。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 4 · 典当行 ============ -->
+<section class="sec sec-alt" id="pawn">
+  <div class="wrap">
+    <p class="sec-no">04</p>
+    <h2 class="sec-title">记忆典当行</h2>
+    <p class="sec-sub">写下一段你想典当的回忆。我们会按今天的内存行情，给你一个诚实的报价。</p>
+
+    <div class="pawn">
+      <div class="pawn-input">
+        <label for="memText">当品描述</label>
+        <textarea id="memText" rows="7" placeholder="例如：2013 年 7 月，教室后排的风扇在转，她把耳机分了我一半，左声道是她的，右声道是我的。"></textarea>
+        <div class="pawn-meta">
+          <span id="byteCount">0 字节</span>
+          <span id="charCount">0 字</span>
+        </div>
+        <button class="btn" id="evalBtn">估 价</button>
+        <p class="pawn-tip">试试只写三个字：<button class="linkbtn" id="fillDemo">我记得你</button></p>
+      </div>
+
+      <div class="pawn-out" id="pawnOut">
+        <div class="receipt" id="receipt">
+          <p class="receipt-h">当 票 / PAWN TICKET</p>
+          <dl>
+            <div><dt>当品重量</dt><dd id="oBytes">—</dd></div>
+            <div><dt>折合容量</dt><dd id="oCap">—</dd></div>
+            <div><dt>今日行情</dt><dd id="oRate">¥ 73.50 / GB</dd></div>
+            <div class="hl"><dt>估值</dt><dd id="oValue">—</dd></div>
+            <div><dt>可换回内存</dt><dd id="oBack">—</dd></div>
+            <div><dt>可支撑 AI 思考</dt><dd id="oThink">—</dd></div>
+          </dl>
+          <p class="receipt-foot" id="oVerdict">请先写下一段回忆。</p>
+        </div>
+        <button class="btn btn-ghost" id="saveBtn" disabled>保存这张当票</button>
+      </div>
+    </div>
+
+    <p class="disclaim">报价基于本页 <b>¥73.50/GB</b> 的示意行情；容量按 1 GB = 1024³ 字节计；AI 思考成本按示意单价折算。整页数据均为虚构叙事，不具任何现实意义。</p>
+  </div>
+</section>
+
+<!-- ============ 5 · 交换 ============ -->
+<section class="sec" id="exchange">
+  <div class="wrap">
+    <p class="sec-no">05</p>
+    <h2 class="sec-title">交换仪式</h2>
+    <p class="sec-sub">柜台后面的人说：想要 16GB，就拿回忆来换。拉动滑块，看看你需要交出多少。</p>
+
+    <div class="ex">
+      <div class="ex-scale">
+        <svg viewBox="0 0 420 260" class="scale-svg" role="img" aria-label="回忆与内存的天平">
+          <line class="pole" x1="210" y1="40" x2="210" y2="236"/>
+          <polygon class="base" points="210,232 168,252 252,252"/>
+          <g id="beamG" transform="rotate(0 210 48)">
+            <line class="beam" x1="42" y1="48" x2="378" y2="48"/>
+            <g id="panL" transform="translate(42 48)">
+              <line class="rope" x1="0" y1="0" x2="-34" y2="52"/>
+              <line class="rope" x1="0" y1="0" x2="34" y2="52"/>
+              <path class="pan" d="M -42 52 A 42 12 0 0 0 42 52 Z"/>
+              <text class="pan-t" x="0" y="76" text-anchor="middle">回忆</text>
+            </g>
+            <g id="panR" transform="translate(378 48)">
+              <line class="rope" x1="0" y1="0" x2="-34" y2="52"/>
+              <line class="rope" x1="0" y1="0" x2="34" y2="52"/>
+              <path class="pan" d="M -42 52 A 42 12 0 0 0 42 52 Z"/>
+              <text class="pan-t" x="0" y="76" text-anchor="middle">内存</text>
+            </g>
+          </g>
+          <circle class="pivot" cx="210" cy="48" r="7"/>
+        </svg>
+      </div>
+
+      <div class="ex-ctrl">
+        <label class="ex-lab" for="memRange">交出回忆</label>
+        <output class="ex-out" id="memOut">40 段</output>
+        <input type="range" id="memRange" min="1" max="1200" value="40" step="1" aria-label="回忆段数">
+        <div class="ex-ticks"><span>1 段</span><span>600</span><span>1200 段</span></div>
+
+        <dl class="ex-read">
+          <div><dt>折合容量</dt><dd id="exCap">0.80 GB</dd></div>
+          <div><dt>目标</dt><dd>16.00 GB</dd></div>
+          <div><dt>完成度</dt><dd id="exPct">5.0%</dd></div>
+        </dl>
+
+        <p class="ex-verdict" id="exVerdict">
+          还差 <b>15.20 GB</b>。按每段回忆 0.02 GB 计，你还得再想起 <b>760</b> 件事。
+        </p>
+      </div>
+    </div>
+
+    <p class="pull">
+      你当然可以再想起 760 件事。<br>
+      问题是——你愿意把它们交出去吗？
+    </p>
+  </div>
+</section>
+
+<!-- ============ 6 · 情书 ============ -->
+<section class="sec sec-dark" id="letter">
+  <div class="wrap">
+    <p class="sec-no">06</p>
+    <h2 class="sec-title">给一根内存条的情书</h2>
+    <div class="letter" id="letterBox">
+      <p class="letter-line" data-l="亲爱的 DDR4："></p>
+      <p class="letter-line" data-l="你从不着急。你在我睡着的时候，把我白天说过的话、删掉又后悔的句子、"></p>
+      <p class="letter-line" data-l="和那张没发出去的照片，全都一个字节一个字节地端着。"></p>
+      <p class="letter-line" data-l="你从不问我值不值钱。你只问：要不要留住。"></p>
+      <p class="letter-line" data-l="后来有人告诉我，你变贵了。"></p>
+      <p class="letter-line" data-l="他们说这是因为 AI 需要记忆，而记忆是有限的。"></p>
+      <p class="letter-line" data-l="我第一次觉得，这句话说得真对——"></p>
+      <p class="letter-line" data-l="只是他们说的「记忆」，和我说的，不是同一个东西。"></p>
+      <p class="letter-line" data-l="所以我决定不卖你。"></p>
+      <p class="letter-line" data-l="行情会跌，颗粒会老，插槽会换代数。"></p>
+      <p class="letter-line" data-l="但你里面那年夏天的风，一直没有停。"></p>
+      <p class="letter-sign" data-l="——一个不愿意清空回收站的人"></p>
+    </div>
+    <button class="btn btn-ghost btn-light" id="replayBtn">再读一遍</button>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-big">爱让记忆变得更加珍贵</p>
+    <p class="foot-en">AI has made RAM more expensive — and memory precious again.</p>
+    <div class="foot-grid">
+      <div>
+        <h4>关于本站</h4>
+        <p>一次关于双关的叙事实验。全站纯静态，无任何第三方依赖、无网络请求、无追踪。</p>
+      </div>
+      <div>
+        <h4>数据说明</h4>
+        <p>页面内所有价格、容量、用量、单价均为<b>虚构的示意数据</b>，仅服务于叙事，不代表任何真实市场行情，不构成购买或投资建议。</p>
+      </div>
+      <div>
+        <h4>技术</h4>
+        <p>手写 HTML / CSS / 原生 JavaScript。图表为内联 SVG，动画使用 IntersectionObserver 与 CSS 过渡，不依赖任何框架或 CDN。</p>
+      </div>
+    </div>
+    <p class="foot-end">© 2026 · 本页为演示作品 · 写完这段文字时，价格又涨了 0.01 元</p>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

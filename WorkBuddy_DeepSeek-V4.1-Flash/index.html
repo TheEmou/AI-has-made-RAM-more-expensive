@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>爱让记忆变得更加珍贵 · AI has made RAM more expensive</title>
+<meta name="description" content="同一个词，两个世界：AI 把内存（RAM）变得昂贵，爱让人脑的记忆变得珍贵。" />
+<meta name="theme-color" content="#f4efe6" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231a1712'/><rect x='8' y='8' width='7' height='16' rx='1.6' fill='%23cf2f1e'/><rect x='17' y='8' width='7' height='16' rx='1.6' fill='%23a9781f'/></svg>" />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar" id="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">MEMORY<em>·</em>记忆</span>
+    </a>
+    <nav class="topnav" aria-label="章节导航">
+      <a href="#ch1">同一个词</a>
+      <a href="#ch2">行情</a>
+      <a href="#ch3">估值</a>
+      <a href="#ch4">对照</a>
+      <a href="#ch5">标本馆</a>
+    </nav>
+  </div>
+  <div class="progress-track"><span id="progressBar"></span></div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <canvas id="memoryField" aria-hidden="true"></canvas>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <p class="kicker"><span class="dot"></span>2026 · 一则关于「记忆」的注脚</p>
+      <h1 class="hero-title">
+        <span class="en">AI has made RAM <em>more expensive</em>.</span>
+        <span class="cn">爱让记忆<br />变得更加珍贵。</span>
+      </h1>
+      <p class="lede">
+        汉语里只有一个词，同时指代那两样东西。<br />
+        一样正被 AI 抢走产能，一年之内价格翻过四倍；<br />
+        一样被爱反复擦拭，越擦越亮，无法报价。
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="#ch2">看看它现在多少钱</a>
+        <a class="btn btn-ghost" href="#ch5">留下一条记忆</a>
+      </div>
+      <dl class="hero-facts">
+        <div>
+          <dt>32GB DDR5 内存套条</dt>
+          <dd><s>¥800</s> <b>¥3,400</b></dd>
+        </div>
+        <div>
+          <dt>人脑记忆容量</dt>
+          <dd><b>约 2.5 PB</b> <s>不可扩容</s></dd>
+        </div>
+        <div>
+          <dt>一份记忆的可复制份数</dt>
+          <dd><b>1</b> <s>无备件</s></dd>
+        </div>
+      </dl>
+    </div>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+  </section>
+
+  <!-- ============ CH 01 ============ -->
+  <section class="section" id="ch1">
+    <div class="wrap">
+      <p class="chapter" data-reveal>CHAPTER 01</p>
+      <h2 class="section-title" data-reveal>同一个词，两个世界</h2>
+      <p class="section-lead" data-reveal>
+        在汉语里，我们只有一个「记忆」。它既指那些让你在深夜忽然醒来的画面，
+        也指插在主板上、按 GB 报价、断电就什么都不剩的那几根条子。
+        于是 2026 年最有意思的一件事发生了：<b>同一个词的两端，价格走向完全相反。</b>
+      </p>
+
+      <div class="switch-board" data-reveal>
+        <div class="switch-caption">
+          <span class="sw-label is-on" data-switch-label="0">人的记忆</span>
+          <button class="switch" id="wordSwitch" role="switch" aria-checked="false"
+                  aria-label="切换「记忆」的两种含义">
+            <span class="knob"></span>
+          </button>
+          <span class="sw-label" data-switch-label="1">机器的记忆</span>
+        </div>
+
+        <div class="switch-stage">
+          <article class="panel panel-human" data-panel="0">
+            <div class="photo">
+              <div class="photo-frame">
+                <span class="photo-tag">未命名 · 摄于某个下午</span>
+              </div>
+              <p class="hand">那天你站在门口，回头笑了一下。<br />我后来把这一秒钟，擦了很多遍。</p>
+            </div>
+            <ul class="spec spec-human">
+              <li><span>容量</span><b>约 2.5 PB</b><i>估算值，不可插拔</i></li>
+              <li><span>读取</span><b>约 0.2 秒 / 次</b><i>且每次读取都会改写原文</i></li>
+              <li><span>功耗</span><b>约 20 W</b><i>含做梦</i></li>
+              <li><span>保存</span><b>终生</b><i>断电也还在</i></li>
+              <li><span>备份</span><b>不支持</b><i>只能转述，无法复制</i></li>
+              <li class="hl"><span>报价</span><b>无</b><i>且正在变得更贵</i></li>
+            </ul>
+          </article>
+
+          <article class="panel panel-machine" data-panel="1">
+            <div class="module">
+              <svg viewBox="0 0 520 200" role="img" aria-label="一条 DDR5 内存条的示意图">
+                <defs>
+                  <linearGradient id="pcb" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#20313d" />
+                    <stop offset="1" stop-color="#14222c" />
+                  </linearGradient>
+                  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#c8a04a" />
+                    <stop offset="1" stop-color="#8f6f28" />
+                  </linearGradient>
+                </defs>
+                <rect x="10" y="24" width="500" height="128" rx="8" fill="url(#pcb)" />
+                <g fill="#2c3f4d">
+                  <rect x="38" y="44" width="46" height="52" rx="3" />
+                  <rect x="94" y="44" width="46" height="52" rx="3" />
+                  <rect x="150" y="44" width="46" height="52" rx="3" />
+                  <rect x="206" y="44" width="46" height="52" rx="3" />
+                  <rect x="262" y="44" width="46" height="52" rx="3" />
+                  <rect x="318" y="44" width="46" height="52" rx="3" />
+                  <rect x="374" y="44" width="46" height="52" rx="3" />
+                  <rect x="430" y="44" width="46" height="52" rx="3" />
+                </g>
+                <g class="pins" fill="url(#gold)">
+                  <rect x="34" y="112" width="7" height="26" rx="1" />
+                  <rect x="48" y="112" width="7" height="26" rx="1" />
+                  <rect x="62" y="112" width="7" height="26" rx="1" />
+                  <rect x="76" y="112" width="7" height="26" rx="1" />
+                  <rect x="90" y="112" width="7" height="26" rx="1" />
+                  <rect x="104" y="112" width="7" height="26" rx="1" />
+                  <rect x="118" y="112" width="7" height="26" rx="1" />
+                  <rect x="132" y="112" width="7" height="26" rx="1" />
+                  <rect x="146" y="112" width="7" height="26" rx="1" />
+                  <rect x="160" y="112" width="7" height="26" rx="1" />
+                  <rect x="174" y="112" width="7" height="26" rx="1" />
+                  <rect x="188" y="112" width="7" height="26" rx="1" />
+                  <rect x="202" y="112" width="7" height="26" rx="1" />
+                  <rect x="216" y="112" width="7" height="26" rx="1" />
+                  <rect x="230" y="112" width="7" height="26" rx="1" />
+                  <rect x="244" y="112" width="7" height="26" rx="1" />
+                  <rect x="258" y="112" width="7" height="26" rx="1" />
+                  <rect x="272" y="112" width="7" height="26" rx="1" />
+                  <rect x="286" y="112" width="7" height="26" rx="1" />
+                  <rect x="300" y="112" width="7" height="26" rx="1" />
+                  <rect x="314" y="112" width="7" height="26" rx="1" />
+                  <rect x="328" y="112" width="7" height="26" rx="1" />
+                  <rect x="342" y="112" width="7" height="26" rx="1" />
+                  <rect x="356" y="112" width="7" height="26" rx="1" />
+                  <rect x="370" y="112" width="7" height="26" rx="1" />
+                  <rect x="384" y="112" width="7" height="26" rx="1" />
+                  <rect x="398" y="112" width="7" height="26" rx="1" />
+                  <rect x="412" y="112" width="7" height="26" rx="1" />
+                  <rect x="426" y="112" width="7" height="26" rx="1" />
+                  <rect x="440" y="112" width="7" height="26" rx="1" />
+                  <rect x="454" y="112" width="7" height="26" rx="1" />
+                  <rect x="468" y="112" width="7" height="26" rx="1" />
+                </g>
+                <rect x="240" y="24" width="4" height="128" fill="#0e1a22" />
+                <text x="262" y="82" fill="#d8cfa8" font-size="15" font-family="monospace"
+                      letter-spacing="1">DDR5 · 32GB · NON-ECC</text>
+                <text class="hot" x="262" y="105" fill="#e0503a" font-size="13"
+                      font-family="monospace" letter-spacing="1">POWER LOST = EVIDENCE LOST</text>
+              </svg>
+            </div>
+            <ul class="spec spec-machine">
+              <li><span>容量</span><b>16 / 32 / 64 GB</b><i>插槽够就能加</i></li>
+              <li><span>带宽</span><b>≈ 51.2 GB/s</b><i>DDR5-6400 单通道</i></li>
+              <li><span>功耗</span><b>单条 3–5 W</b><i>整机数百瓦</i></li>
+              <li><span>保存</span><b>断电即失</b><i>名字就叫「易失性」</i></li>
+              <li><span>备份</span><b>无限复制</b><i>一字不差</i></li>
+              <li class="hl"><span>报价</span><b>¥106 / GB</b><i>↑ 一年内翻了四倍多</i></li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="switch-note" id="switchNote">
+          同一个词的两端：一边不可扩容、不可复制、不可报价；一边可以插满 128GB，但断电就忘。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CH 02 ============ -->
+  <section class="section section-alt" id="ch2">
+    <div class="wrap">
+      <p class="chapter" data-reveal>CHAPTER 02</p>
+      <h2 class="section-title" data-reveal>AI 把「记忆」买贵了</h2>
+      <p class="section-lead" data-reveal>
+        这不是一次普通的存储周期。过去二十年，内存价格由手机和电脑的库存节奏推动，
+        两三年一个轮回。而这一轮，掏钱的是数据中心——
+        <b>单台 AI 服务器的内存搭载量，是传统服务器的 8 到 10 倍。</b>
+        三大原厂把 70%–90% 的先进产能转向利润更高的 HBM，
+        留给消费级的那部分，被系统性抽走了。
+      </p>
+
+      <div class="chart-card" data-reveal>
+        <div class="chart-head">
+          <div>
+            <h3>32GB DDR5 内存套条 · 国内零售参考价</h3>
+            <p class="chart-sub">据公开报道整理的近似走势 · 单位：元人民币</p>
+          </div>
+          <div class="chart-badge">
+            <span>一年涨幅</span>
+            <strong id="ramMultiple">+325%</strong>
+          </div>
+        </div>
+        <div class="chart-body">
+          <div class="chart-y" aria-hidden="true"></div>
+          <div class="bars" id="ramChart" role="img"
+               aria-label="32GB DDR5 内存价格从 2025 年一季度的 620 元上涨至 2026 年三季度的 3400 元"></div>
+        </div>
+        <p class="chart-foot">
+          同一时期，1TB 固态硬盘从约 ¥400 涨到千元以上；16GB DDR5 与 1TB SSD 的终端价同比涨幅均超过 130%。
+          <span class="warn">数据仅用于叙事与示意，不构成任何投资参考。</span>
+        </p>
+      </div>
+
+      <div class="stat-grid" data-reveal>
+        <article class="stat">
+          <p class="stat-num" data-count="98" data-prefix="+" data-suffix="%">+98%</p>
+          <h4>2026 Q1 一般型 DRAM 合约价环比涨幅</h4>
+          <p class="src">TrendForce</p>
+        </article>
+        <article class="stat">
+          <p class="stat-num" data-count="63" data-prefix="+" data-suffix="%">+63%</p>
+          <h4>2026 Q2 环比涨幅仍未停歇</h4>
+          <p class="src">TrendForce</p>
+        </article>
+        <article class="stat">
+          <p class="stat-num" data-count="25" data-suffix="%">25%</p>
+          <h4>HBM 已占 DRAM 晶圆产能的份额</h4>
+          <p class="src">2020 年这个数字是 2%</p>
+        </article>
+        <article class="stat">
+          <p class="stat-num" data-count="10" data-suffix="×">10×</p>
+          <h4>AI 服务器单机内存搭载量 / 传统服务器</h4>
+          <p class="src">行业测算</p>
+        </article>
+        <article class="stat">
+          <p class="stat-num" data-count="53" data-suffix="%">53%</p>
+          <h4>全球存储需求中被 AI 服务器吃掉的比例</h4>
+          <p class="src">2026 年预测</p>
+        </article>
+        <article class="stat">
+          <p class="stat-num" data-count="37" data-prefix="$" data-suffix="/GB">$37/GB</p>
+          <h4>服务器级 DDR5 RDIMM 现货单价上限</h4>
+          <p class="src">12TB 内存池硬件成本近 50 万美元</p>
+        </article>
+      </div>
+
+      <div class="capacity-card" data-reveal>
+        <h3>一片晶圆，只能去一个地方</h3>
+        <p class="capacity-note">
+          一片 HBM 晶圆，大约要消耗三片 DDR5 的产能。当原厂把产线掉头，
+          你手里的那根内存条就变成了「剩下的部分」。
+        </p>
+        <div class="cap-legend">
+          <span><i class="k-hbm"></i>HBM 高带宽内存（优先供给 AI）</span>
+          <span><i class="k-gen"></i>通用 DRAM（供给 PC 与手机）</span>
+        </div>
+        <div class="capacity-bars">
+          <div class="cap-row">
+            <span class="cap-year">2020</span>
+            <div class="cap-track">
+              <span class="cap-fill cap-hbm" style="--w: 2%" title="HBM 占 DRAM 晶圆产能 2%">HBM 2%</span>
+              <span class="cap-fill cap-gen" style="--w: 98%" title="通用 DRAM 占 98%">通用 DRAM 98%</span>
+            </div>
+          </div>
+          <div class="cap-row">
+            <span class="cap-year">2026</span>
+            <div class="cap-track">
+              <span class="cap-fill cap-hbm" style="--w: 25%" title="HBM 占 DRAM 晶圆产能 25%">HBM 25%</span>
+              <span class="cap-fill cap-gen" style="--w: 75%" title="通用 DRAM 占 75%">通用 DRAM 75%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ol class="chain" data-reveal>
+        <li>
+          <b>云端长单</b>
+          <span>超大规模云厂商用多年期协议，提前锁走未来数年的晶圆产出。</span>
+        </li>
+        <li>
+          <b>产能转向</b>
+          <span>三大原厂把 70%–90% 的先进产能押给 HBM 与服务器 DRAM。</span>
+        </li>
+        <li>
+          <b>消费级让位</b>
+          <span>手机、PC 能分到的通用 DRAM 被压缩，库存降到历史低位。</span>
+        </li>
+        <li>
+          <b>代价传导</b>
+          <span>内存条、固态硬盘、手机、游戏主机，一路涨价到你手上。</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ CH 03 ============ -->
+  <section class="section" id="ch3">
+    <div class="wrap">
+      <p class="chapter" data-reveal>CHAPTER 03</p>
+      <h2 class="section-title" data-reveal>给一份记忆估价</h2>
+      <p class="section-lead" data-reveal>
+        既然「记忆」可以用 GB 报价，那我们不妨老老实实算一次：
+        一个人一辈子的记忆，按今天的行情，值多少钱。
+        算完之后你会发现——<b>数字很大，但它依然是最便宜的那部分。</b>
+      </p>
+
+      <div class="quote-card" data-reveal>
+        <p class="quote-line">
+          <span>人脑等效容量</span>
+          <b data-count="2.5" data-decimals="1" data-suffix=" PB">2.5 PB</b>
+        </p>
+        <p class="quote-line">
+          <span>今日颗粒价</span>
+          <b>¥106 / GB</b>
+        </p>
+        <p class="quote-line">
+          <span>折算总额</span>
+          <b class="money">≈ ¥2.78 亿</b>
+        </p>
+        <p class="quote-line">
+          <span>运行功耗</span>
+          <b>20 W</b>
+        </p>
+        <p class="quote-line">
+          <span>可复制份数</span>
+          <b class="cp">1</b>
+        </p>
+        <p class="quote-foot">
+          2.5 PB ≈ 2,621,440 GB，按 ¥106/GB 计算约为 ¥277,872,640。
+          这是把一个人的全部记忆当作硬盘容量来卖的价格——前提是，真的有人买得起，
+          而且真的有人愿意卖。
+        </p>
+      </div>
+
+      <div class="calc-card" data-reveal>
+        <h3>换个算法：把你清醒的时光录下来</h3>
+        <p class="calc-note">
+          假设从出生起，以 1080p / 4.5Mbps 全程录制你清醒的每一秒，每天按 16 小时计。
+          按今天的颗粒价，这笔存储账单是：
+        </p>
+
+        <div class="calc-control">
+          <label for="ageRange">你的年龄</label>
+          <output id="ageOut">30</output>
+          <input type="range" id="ageRange" min="1" max="100" value="30" step="1" />
+          <div class="calc-scale" aria-hidden="true">
+            <span>1</span><span>25</span><span>50</span><span>75</span><span>100</span>
+          </div>
+        </div>
+
+        <ul class="calc-lines">
+          <li><span>清醒时长</span><b id="calcHours">175,200 小时</b></li>
+          <li><span>等效录制容量</span><b id="calcGb">355,656 GB</b></li>
+          <li><span>需要的内存条</span><b id="calcSticks">11,114 条（32GB）</b></li>
+          <li class="total"><span>按今日行情折算</span><b id="calcCost">¥37,699,536</b></li>
+        </ul>
+
+        <div class="calc-actions">
+          <button class="btn btn-solid" id="btnQuote">为它标价</button>
+          <button class="btn btn-gold" id="btnLove">加上爱</button>
+        </div>
+
+        <div class="calc-verdict" id="calcVerdict" aria-live="polite">
+          <p class="verdict-idle">还没标价。点击上面的按钮，看看它值多少。</p>
+        </div>
+        <p class="calc-asm">
+          假设说明：全天清醒时长按 16 小时计，1080p / 4.5Mbps 约合 2.03 GB / 小时；
+          颗粒单价按 32GB DDR5 现价 ¥3,400 折算为 ¥106 / GB。仅为思想实验，不构成报价。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CH 04 ============ -->
+  <section class="section section-alt" id="ch4">
+    <div class="wrap">
+      <p class="chapter" data-reveal>CHAPTER 04</p>
+      <h2 class="section-title" data-reveal>硅基记忆 vs 碳基记忆</h2>
+      <p class="section-lead" data-reveal>
+        把两种「记忆」放在同一张表里，你会立刻看到：它们几乎没有一项参数是同一个量级，
+        除了最后两行——<b>一行有报价，一行没有。</b>
+      </p>
+
+      <div class="table-wrap" data-reveal>
+        <table class="compare">
+          <thead>
+            <tr>
+              <th scope="col">维度</th>
+              <th scope="col"><span class="th-machine">硅基记忆 · DRAM</span></th>
+              <th scope="col"><span class="th-human">碳基记忆 · 人脑</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">容量</th>
+              <td>16–64 GB / 条，插槽够就能无限堆叠</td>
+              <td>约 2.5 PB，出生时封顶</td>
+            </tr>
+            <tr>
+              <th scope="row">带宽</th>
+              <td>≈ 51.2 GB/s，一字不差</td>
+              <td>检索一次约 0.2 秒，且每次回想都会改写原文</td>
+            </tr>
+            <tr>
+              <th scope="row">功耗</th>
+              <td>单条 3–5 W，整机数百瓦</td>
+              <td>约 20 W，全天候，含做梦</td>
+            </tr>
+            <tr>
+              <th scope="row">断电之后</th>
+              <td>什么都没有</td>
+              <td>什么都还在，包括你最想删掉的那段</td>
+            </tr>
+            <tr>
+              <th scope="row">复制</th>
+              <td>无限份，字节级一致</td>
+              <td>只能转述，转述即失真</td>
+            </tr>
+            <tr>
+              <th scope="row">删除</th>
+              <td>覆写、消磁、物理销毁</td>
+              <td>无法主动删除，只能等时间慢慢覆盖</td>
+            </tr>
+            <tr>
+              <th scope="row">扩容</th>
+              <td>加钱就行</td>
+              <td>没有插槽</td>
+            </tr>
+            <tr class="row-price">
+              <th scope="row">价格</th>
+              <td><b>¥106 / GB</b> <span class="up">↑ 正在变贵</span></td>
+              <td><b>无报价</b> <span class="up-gold">↑ 正在变珍贵</span></td>
+            </tr>
+            <tr class="row-key">
+              <th scope="row">唯一性</th>
+              <td>可替代、可保修、可退换</td>
+              <td><b>不可替代。世界上只有一份，且没有备件。</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CH 05 ============ -->
+  <section class="section" id="ch5">
+    <div class="wrap">
+      <p class="chapter" data-reveal>CHAPTER 05</p>
+      <h2 class="section-title" data-reveal>记忆标本馆</h2>
+      <p class="section-lead" data-reveal>
+        写上一条你不想弄丢的记忆。它会以今天的行情被折算成存储成本——
+        然后你会发现，这条账单永远结不出来，因为<strong>它没有替代品</strong>。
+        内容只保存在你自己的浏览器里。
+      </p>
+
+      <div class="museum-bar" data-reveal>
+        <label class="sr-only" for="memoryInput">写下一条记忆</label>
+        <input id="memoryInput" type="text" maxlength="60"
+               placeholder="例如：她第一次叫我的名字，那天下午光线很短。" />
+        <button class="btn btn-solid" id="btnSave">存入</button>
+      </div>
+
+      <div class="museum-stats" data-reveal>
+        <div><span>已存入</span><b id="mCount">0</b><i>条</i></div>
+        <div><span>可计价存储成本</span><b id="mCost">¥0.00</b><i>按今日颗粒价</i></div>
+        <div class="inf"><span>情感溢价</span><b>∞</b><i>不可计量</i></div>
+      </div>
+
+      <div class="museum-wall" id="museumWall" data-reveal></div>
+      <p class="museum-empty" id="museumEmpty">标本馆还是空的。写下第一条。</p>
+    </div>
+  </section>
+
+  <!-- ============ OUTRO ============ -->
+  <section class="outro">
+    <div class="wrap">
+      <p class="outro-en">AI has made RAM more expensive.</p>
+      <h2 class="outro-cn">爱让记忆变得更加珍贵。</h2>
+      <p class="outro-text">
+        存储芯片的价格会回落。机构说，供需真正缓和大概要等到 2028 年，
+        那时候你又能用便宜的价格，买下十几个 TB 的空白。
+        但那些空白不会自动变成记忆——它们只是被腾出来的地方，
+        等着某个人走过来说一句话，然后被你反复擦拭，直到发亮。
+      </p>
+      <p class="outro-sign">愿你的容量永远不够用，因为值得记住的太多。</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-col">
+        <h4>数据来源</h4>
+        <ul>
+          <li>TrendForce 集邦咨询 · 2026 年 DRAM / NAND 合约价报告</li>
+          <li>Counterpoint Research · 64GB DIMM 价格追踪</li>
+          <li>中国经济网、经济参考报、新浪财经等公开报道（2026 年 7–8 月）</li>
+          <li>人脑容量约 2.5 PB 为学界广泛引用的估算值</li>
+        </ul>
+        <p class="disclaimer">
+          本页所有价格均为公开报道整理，用于叙事与示意，不构成任何投资建议。
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>关于这个页面</h4>
+        <ul>
+          <li>纯静态站点，无外部依赖、不加载字体、不上传任何数据</li>
+          <li>「记忆标本馆」使用浏览器本地存储（localStorage）</li>
+          <li>响应式布局，支持 prefers-reduced-motion</li>
+        </ul>
+        <p class="credit">WorkBuddy × DeepSeek-V4.1-Flash · 2026-09-20</p>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

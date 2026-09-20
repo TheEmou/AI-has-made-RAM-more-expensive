@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="爱让记忆变得更加珍贵 · AI has made RAM more expensive — 同一句话，两种读法。" />
+  <title>双重读取 · 爱让记忆变得更加珍贵 / AI has made RAM more expensive</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%231C2428'/%3E%3Crect x='10' y='18' width='44' height='28' rx='2' fill='none' stroke='%233D7A6A' stroke-width='3'/%3E%3Ccircle cx='24' cy='32' r='4' fill='%23C96B6B'/%3E%3Ccircle cx='40' cy='32' r='4' fill='%235B8C9E'/%3E%3Cpath d='M24 32h16' stroke='%23D4A84B' stroke-width='2'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <!-- Hero -->
+  <header class="hero">
+    <svg class="hero-trace" aria-hidden="true" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="pads" width="40" height="40" patternUnits="userSpaceOnUse">
+          <circle cx="20" cy="20" r="1.2" fill="#3D7A6A" opacity="0.35" />
+        </pattern>
+      </defs>
+      <rect width="1200" height="800" fill="url(#pads)" />
+      <!-- copper traces -->
+      <path class="flow" d="M40 120 H220 V280 H400 V200 H620" fill="none" stroke="#3D7A6A" stroke-width="1.2" opacity="0.55" />
+      <path class="flow" d="M120 700 V520 H300 V400 H480 V560 H720 V480" fill="none" stroke="#3D7A6A" stroke-width="1" opacity="0.4" />
+      <path class="flow" d="M900 80 V220 H780 V360 H980 V500 H1160" fill="none" stroke="#5B8C9E" stroke-width="1.1" opacity="0.45" />
+      <path class="flow" d="M0 480 H140 V340 H260" fill="none" stroke="#C96B6B" stroke-width="1" opacity="0.35" />
+      <!-- via pads -->
+      <g fill="none" stroke="#D4A84B" stroke-width="1" opacity="0.45">
+        <circle cx="220" cy="280" r="4" />
+        <circle cx="620" cy="200" r="4" />
+        <circle cx="300" cy="400" r="4" />
+        <circle cx="720" cy="480" r="4" />
+        <circle cx="980" cy="360" r="4" />
+        <circle cx="140" cy="340" r="4" />
+      </g>
+      <g fill="#D4A84B" opacity="0.5">
+        <circle cx="220" cy="280" r="1.5" />
+        <circle cx="620" cy="200" r="1.5" />
+        <circle cx="720" cy="480" r="1.5" />
+      </g>
+    </svg>
+
+    <div class="wrap">
+      <div class="hero-label">DUAL READ · 0x00 · MEMORY BANK</div>
+      <div class="hero-dual">
+        <h1 class="hero-zh">
+          <span class="hl">爱</span>让记忆变得更加珍贵
+        </h1>
+        <p class="hero-en">
+          <span class="hl">AI</span> has made <span class="hl">RAM</span> more expensive
+        </p>
+        <p class="hero-sub">
+          同一句话，两种读法。<em>爱 / AI</em>，<em>记忆 / RAM</em>——
+          人类用眼泪给记忆标价，硅基用电费给内存标价。
+          而它们，写在同一种介质上：怕被忘掉的东西。
+        </p>
+      </div>
+
+      <div class="hero-meta">
+        <div>
+          <b>READ MODE A</b>
+          人类档案 · Human Archive
+        </div>
+        <div>
+          <b>READ MODE B</b>
+          硅基账本 · Silicon Ledger
+        </div>
+        <div>
+          <b>MEDIUM</b>
+          同一颗会遗忘的芯片
+        </div>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true">
+        <span></span>
+        SCROLL TO ACCESS
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 01 Double Read -->
+    <section class="module" id="double-read" aria-labelledby="t-double">
+      <div class="pin-edge" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="wrap reveal">
+        <div class="eyebrow">01 · DOUBLE READ</div>
+        <h2 class="section-title" id="t-double">
+          双重读取
+          <span class="en">One sentence, two economies</span>
+        </h2>
+        <p class="lead">
+          中文与英文在拼音/字母层面擦肩而过：<strong>爱 ≈ AI</strong>，
+          <strong>记忆 = Memory = RAM</strong>。
+          于是同一行字，既能读成情书，也能读成财报。
+        </p>
+
+        <div class="word-map">
+          <div class="word-pair">
+            <div class="zh">爱</div>
+            <div class="arrow">↔ READ AS</div>
+            <div class="en">AI</div>
+            <div class="note">人类的情感引擎 / 人类造的推理引擎</div>
+          </div>
+          <div class="word-pair">
+            <div class="zh">记忆</div>
+            <div class="arrow">↔ READ AS</div>
+            <div class="en">Memory / RAM</div>
+            <div class="note">被反复读取的往事 / 被反复寻址的单元</div>
+          </div>
+          <div class="word-pair">
+            <div class="zh">珍贵</div>
+            <div class="arrow">↔ READ AS</div>
+            <div class="en">Expensive</div>
+            <div class="note">无价之物 / 涨价之物——只差一次翻译</div>
+          </div>
+        </div>
+
+        <div class="dual-grid">
+          <article class="plaque human" data-tag="MODE A">
+            <h3>人类侧的读法</h3>
+            <p class="quote">「爱让记忆变得更加珍贵。」</p>
+            <p>
+              珍贵不是价格标签。是因为有人一起活过，记忆才从背景噪音变成可携带的光源。
+              我们害怕的不是存储不够，而是再也读不到那一页。
+            </p>
+          </article>
+          <article class="plaque silicon" data-tag="MODE B">
+            <h3>SILICON SIDE</h3>
+            <p class="quote">AI has made RAM more expensive.</p>
+            <p>
+              Data centers bid first. Laptops follow.
+              The same scarce wafer is asked to hold a model’s context and your unfinished draft.
+              Scarcity is no longer metaphor — it is a quote on a futures curve.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 Human Archive -->
+    <section class="module" id="archive" aria-labelledby="t-archive">
+      <div class="wrap reveal">
+        <div class="eyebrow rose">02 · HUMAN ARCHIVE</div>
+        <h2 class="section-title" id="t-archive">
+          人类档案
+          <span class="en">What love does to memory</span>
+        </h2>
+        <p class="lead">
+          爱不会增加存储容量。爱改变的是<strong>读取频率</strong>与<strong>损坏阈值</strong>——
+          被爱过的记忆，更常被打开，也更难被静默删除。
+        </p>
+
+        <div class="archive">
+          <article class="memory-card">
+            <div class="idx">ENTRY · 01</div>
+            <h4>第一次认真看你</h4>
+            <p>
+              不是电影式的慢镜头。是会议室窗外的光刚好落在你手边，而我突然希望会议永远不要结束。
+              这一段没有备份。它只写了一次，却读了半生。
+            </p>
+            <div class="price">标价 <b>无价</b> · 写入成本：心跳加速</div>
+          </article>
+          <article class="memory-card">
+            <div class="idx">ENTRY · 02</div>
+            <h4>雨天的电话</h4>
+            <p>
+              信号很差，你的声音被雨敲碎。我把每一秒都存了下来——不是录音，是采样率异常的心跳。
+              后来我明白：珍贵的是你还在试图说话，而不是音频有多清晰。
+            </p>
+            <div class="price">标价 <b>不可转让</b> · 介质：神经突触</div>
+          </article>
+          <article class="memory-card">
+            <div class="idx">ENTRY · 03</div>
+            <h4>空相册</h4>
+            <p>
+              相机坏了，一张照片也没导出。奇怪的是，那天阳光的角度、走廊的气味、你笑的时候偏头的幅度，
+              比任何 JPEG 都完整。爱让记忆珍贵——因为它逼大脑启用冗余写入。
+            </p>
+            <div class="price">标价 <b>仅本机可见</b> · 无法云同步</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Silicon Ledger -->
+    <section class="module" id="ledger" aria-labelledby="t-ledger">
+      <div class="wrap reveal">
+        <div class="eyebrow">03 · SILICON LEDGER</div>
+        <h2 class="section-title" id="t-ledger">
+          硅基账本
+          <span class="en">What AI does to RAM</span>
+        </h2>
+        <p class="lead">
+          当模型学会「记住」，世界开始用美元争夺同一类晶体管。
+          下面不是历史课，是一张对照表：<strong>两种记忆如何被定价</strong>。
+        </p>
+
+        <table class="ledger">
+          <thead>
+            <tr>
+              <th>条目</th>
+              <th>侧写</th>
+              <th>定价逻辑</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HBM / 训练集群</td>
+              <td class="note">AI 把高带宽内存从「显卡配件」抬成「算力门票」。产能被预订到下一年。</td>
+              <td class="note">竞价优先：谁先锁定晶圆，谁先跑通模型。</td>
+            </tr>
+            <tr>
+              <td>消费级 DRAM</td>
+              <td class="note">数据中心吃掉供给，笔记本与手机跟着涨价。日常设备替未来买单。</td>
+              <td class="note">传导定价：上游合约价 → 下游零售价。</td>
+            </tr>
+            <tr>
+              <td>Context Window</td>
+              <td class="note">模型的「工作记忆」有限，于是检索、压缩、外挂记忆成了独立产业。</td>
+              <td class="note">稀缺窗口：记得住多少，决定值多少。</td>
+            </tr>
+            <tr>
+              <td>ECC / 刷新周期</td>
+              <td class="note">机器靠纠错码与周期刷新对抗数据蒸发。</td>
+              <td class="note">运维成本：记忆需要被持续供电才成立。</td>
+            </tr>
+            <tr class="human-row">
+              <td>爱 · 人类记忆</td>
+              <td class="note">不靠刷新电路，靠重逢、故事、照片与「还在吗」。损耗的是时间，不是比特。</td>
+              <td class="note">无市场报价。唯一确定的是：错过就清空。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 04 Memory Bank interactive -->
+    <section class="module" id="bank" aria-labelledby="t-bank">
+      <div class="wrap reveal">
+        <div class="eyebrow amber">04 · MEMORY BANK</div>
+        <h2 class="section-title" id="t-bank">
+          同一块介质
+          <span class="en">Click a cell · read both worlds</span>
+        </h2>
+        <p class="lead">
+          人类写入与硅基写入被放在同一块存储矩阵里。
+          <strong>点亮的单元</strong>代表已被访问的记忆；红色是情书，蓝色是账本。
+          未点亮的格子也在那里——只是还没被读取。
+        </p>
+
+        <div class="bank-layout">
+          <div>
+            <div id="cell-grid" class="cell-grid" role="grid" aria-label="记忆存储矩阵"></div>
+            <p class="bank-hint">TIP · 方向键可在单元格之间移动 · Enter / 点击读取</p>
+          </div>
+          <aside id="bank-readout" class="bank-readout" aria-live="polite"></aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="module unify" id="close" aria-labelledby="t-close">
+      <div class="wrap reveal">
+        <div class="eyebrow" style="justify-content:center">05 · UNIFY</div>
+        <h2 class="big" id="t-close">
+          也许记忆从来就不便宜。<br />
+          <span class="rose">爱</span>用眼泪标价，
+          <span class="blue">AI</span> 用电费标价。
+        </h2>
+        <div class="poem">
+          <span>我们把两种价格写进同一颗心：</span>
+          <span>一种怕忘记，一种怕记不住。</span>
+          <span>「珍贵」与「expensive」隔着翻译，</span>
+          <span>却共用同一条害怕失去的通路。</span>
+        </div>
+        <div class="poem" style="color: var(--silk); font-family: var(--mono); font-size: 0.92rem; letter-spacing: 0.04em;">
+          <span>爱让记忆变得更加珍贵。</span>
+          <span>AI has made RAM more expensive.</span>
+          <span>Read both. Keep both.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <div class="row">
+        <div>
+          <strong>双重读取</strong>
+          Dual Read · A site on one bilingual pun
+        </div>
+        <div>
+          Theme · 爱让记忆变得更加珍贵 / AI has made RAM more expensive
+        </div>
+        <div>
+          Built as a memory module you can read
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
