@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="记忆星图 — 爱让记忆变得更加珍贵 / AI has made RAM more expensive。一座观测两种「记忆」的暗夜天文台：人类的记忆拒绝计价，硅基的内存持续涨价。" />
+  <title>记忆星图 · 爱让记忆变得更加珍贵 / AI has made RAM more expensive</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2307080D'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-size='34' fill='%23E9B44C' font-family='Georgia,serif'%3E%E7%8F%8D%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Serif+SC:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <!-- 开屏：唤醒记忆 -->
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot-inner">
+      <div class="boot-mark">珍</div>
+      <p class="boot-line"><span id="bootTxt">正在唤醒两种记忆</span><span class="caret">▌</span></p>
+      <p class="boot-sub">WAKING BOTH KINDS OF MEMORY…</p>
+    </div>
+  </div>
+
+  <!-- 全局背景：星图粒子 -->
+  <canvas class="starfield" id="starfield" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- 滚动进度 -->
+  <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+  <!-- 自定义光标 -->
+  <div class="cursor" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <a class="nav-brand" href="#hero">
+      <span class="nav-seal">珍</span>
+      <span class="nav-title">记忆星图<i>MEMORY&nbsp;ATLAS</i></span>
+    </a>
+    <nav class="nav-links" aria-label="章节导航">
+      <a href="#read">01 双读</a>
+      <a href="#atlas">02 星云</a>
+      <a href="#market">03 曲线</a>
+      <a href="#seal">04 封存</a>
+      <a href="#coda">05 尾声</a>
+      <a class="nav-back" href="../index.html">← 合集</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ———————————— HERO ———————————— -->
+    <section class="hero" id="hero">
+      <p class="hero-eyebrow rv">TRAE 独立作答 · 多 AGENT 双关主题展 &nbsp;/&nbsp; ONE SENTENCE, TWO ECONOMIES</p>
+      <h1 class="hero-title" id="heroTitle" aria-label="爱让记忆变得更加珍贵">爱让记忆变得更加珍贵</h1>
+      <p class="hero-en rv" id="heroEn">AI&nbsp;has made <em>RAM</em>&nbsp;more expensive</p>
+
+      <div class="hero-trace rv">
+        <canvas id="ecg" aria-label="心跳与行情交替的脉冲线"></canvas>
+        <span class="trace-tag trace-tag-h" id="traceTagH">♥ HUMAN · 心跳</span>
+        <span class="trace-tag trace-tag-s" id="traceTagS">$ SILICON · 行情</span>
+      </div>
+
+      <p class="hero-lead rv">
+        同一句双关，落在两本账上。<br />
+        硅基的内存按 GB 报价、随 AI 抢购一路升值；<br />
+        心里的记忆没有扩容口，却因爱被反复读取，越旧越<strong>珍贵</strong>。
+      </p>
+
+      <div class="hero-actions rv">
+        <a class="btn btn-gold magnetic" href="#atlas"><span>点亮记忆星云</span><i>↓</i></a>
+        <a class="btn btn-ghost magnetic" href="#seal"><span>封存一段记忆</span><i>◆</i></a>
+      </div>
+
+      <div class="scroll-cue rv" aria-hidden="true">
+        <span>SCROLL</span>
+        <span class="cue-line"></span>
+      </div>
+    </section>
+
+    <!-- ———————————— TICKER ———————————— -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>DDR5 现货指数 ↑&nbsp;218%</span><i>·</i>
+        <span>一行眼泪 · 不报价</span><i>·</i>
+        <span>HBM3 被 AI 包场</span><i>·</i>
+        <span>那年夏天 · 拒绝成交</span><i>·</i>
+        <span>AI DEMAND SURGES</span><i>·</i>
+        <span>外婆喊的全名 · 无价</span><i>·</i>
+        <span>显存告急 / 心跳照常</span><i>·</i>
+        <span>NOT FOR SALE</span><i>·</i>
+        <span>断电之前 · 记得想念</span><i>·</i>
+      </div>
+    </div>
+
+    <!-- ———————————— 01 一字两读 ———————————— -->
+    <section class="section" id="read">
+      <div class="sec-head rv">
+        <span class="sec-no">01</span>
+        <div>
+          <h2 class="sec-title">一字两读</h2>
+          <p class="sec-en">ONE SENTENCE, TWO READINGS — 拖动中线，换一种读法</p>
+        </div>
+      </div>
+
+      <div class="split-stage rv" id="splitStage">
+        <div class="split-layer split-human" id="layerHuman">
+          <span class="split-tag">情书读法 / LETTER</span>
+          <strong class="split-text">爱让记忆变得更加珍贵</strong>
+        </div>
+        <div class="split-layer split-silicon" id="layerSilicon">
+          <span class="split-tag">行情读法 / MARKET</span>
+          <strong class="split-text">AI HAS MADE RAM MORE EXPENSIVE</strong>
+        </div>
+        <div class="split-handle" id="splitHandle" role="slider" tabindex="0"
+             aria-label="切换情书读法与行情读法" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <span class="handle-grip">‖</span>
+        </div>
+      </div>
+
+      <ul class="token-row rv">
+        <li><span class="t-zh">爱</span><span class="t-arr">⇄</span><span class="t-en">AI</span></li>
+        <li><span class="t-zh">记忆</span><span class="t-arr">⇄</span><span class="t-en">MEMORY / RAM</span></li>
+        <li><span class="t-zh">珍贵</span><span class="t-arr">⇄</span><span class="t-en">PRECIOUS / EXPENSIVE</span></li>
+      </ul>
+
+      <div class="read-cards">
+        <article class="read-card rv tone-human">
+          <h3>写给人的那句</h3>
+          <p>
+            爱不生产新的记忆，它只是悄悄改写记忆的<strong>权重</strong>：
+            让一句寻常的叮嘱、一碗温度刚好的饭、一次没有说出口的告别，
+            在之后无数次读取里越放越亮。记忆不扩容、不备份、不可折价——
+            它因为被两个人共同活过，而<strong>拒绝计价</strong>。
+          </p>
+        </article>
+        <article class="read-card rv tone-silicon">
+          <h3>写给硅的那句</h3>
+          <p>
+            大模型吞掉了晶圆厂的产能，HBM 被整层包下，内存条按 GB 明码标价。
+            同一个词 <strong>MEMORY</strong>，在另一本账上持续升值：
+            训练一步要占用数百 GB 显存，推理一次都在为带宽付费。
+            硅基的记忆很贵——而且<strong>还在变贵</strong>。
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ———————————— 02 记忆星云 ———————————— -->
+    <section class="section" id="atlas">
+      <div class="sec-head rv">
+        <span class="sec-no">02</span>
+        <div>
+          <h2 class="sec-title">记忆星云</h2>
+          <p class="sec-en">A CONSTELLATION OF BOTH MEMORIES — 移动光标靠近，点击任一光点读取</p>
+        </div>
+      </div>
+
+      <div class="atlas-grid">
+        <div class="atlas-canvas-wrap rv">
+          <canvas id="atlasCanvas" aria-label="可交互的记忆星云，光点代表一段人类记忆或一个硅基存储地址"></canvas>
+          <div class="atlas-legend">
+            <span><i class="dot dot-human"></i>人类记忆 HUMAN</span>
+            <span><i class="dot dot-silicon"></i>硅基地址 SILICON</span>
+          </div>
+          <div class="atlas-hint">↗ 拖动星图 · 点击光点读取</div>
+        </div>
+
+        <aside class="atlas-panel rv" id="atlasPanel" aria-live="polite">
+          <p class="panel-placeholder" id="panelPlaceholder">
+            星图里漂浮着两种光点：<br /><br />
+            <strong>琥珀色</strong>的，是人舍不得删的片段；<br />
+            <strong>电光青</strong>的，是硅里转瞬即逝的地址。<br /><br />
+            点一颗，读一段。
+          </p>
+          <div class="panel-detail" id="panelDetail" hidden>
+            <span class="detail-kind" id="detailKind"></span>
+            <p class="detail-zh" id="detailZh"></p>
+            <p class="detail-en" id="detailEn"></p>
+            <p class="detail-addr" id="detailAddr"></p>
+          </div>
+          <div class="atlas-count">
+            <span id="litCount">0</span><i>/</i><span id="litTotal">0</span>
+            <em>已点亮 LIGHTED</em>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ———————————— 03 两条上升曲线 ———————————— -->
+    <section class="section" id="market">
+      <div class="sec-head rv">
+        <span class="sec-no">03</span>
+        <div>
+          <h2 class="sec-title">两条上升曲线</h2>
+          <p class="sec-en">BOTH LINES GO UP — 一条按美元结算，一条按余生结算</p>
+        </div>
+      </div>
+
+      <div class="stat-row rv">
+        <div class="stat">
+          <strong><span class="counter" data-target="218" data-suffix="%">0</span></strong>
+          <span class="stat-label">DRAM 现货指数涨幅<br /><i>2023 → 2026 · 示意</i></span>
+        </div>
+        <div class="stat">
+          <strong><span class="counter" data-target="12" data-suffix="×">0</span></strong>
+          <span class="stat-label">AI 算力需求指数<br /><i>2019 → 2026 · 示意</i></span>
+        </div>
+        <div class="stat">
+          <strong><span class="counter" data-target="50" data-suffix="%">0</span></strong>
+          <span class="stat-label">HBM 占 AI 加速卡成本<br /><i>行业公开口径区间</i></span>
+        </div>
+        <div class="stat stat-priceless">
+          <strong data-priceless>¥&nbsp;—</strong>
+          <span class="stat-label">单条人类记忆的报价<br /><i>MARKET REFUSED THE QUOTE</i></span>
+        </div>
+      </div>
+
+      <div class="chart-card rv">
+        <div class="chart-head">
+          <div class="chart-legend">
+            <span><i class="lg lg-cyan"></i>DRAM 现货价格指数（2019=100 · 示意）</span>
+            <span><i class="lg lg-gold"></i>AI 算力需求指数（2019=100 · 示意）</span>
+          </div>
+          <span class="chart-note">数据为主题示意，非实时行情</span>
+        </div>
+        <canvas id="chartCanvas"></canvas>
+      </div>
+
+      <p class="chart-caption rv">
+        曲线只记录能被计价的部分。那些让曲线解释不了的尖峰——
+        深夜翻到的旧聊天记录、通讯录里不敢拨出的名字——
+        没有坐标轴，却年年升值。
+      </p>
+    </section>
+
+    <!-- ———————————— 04 记忆封存机 ———————————— -->
+    <section class="section" id="seal">
+      <div class="sec-head rv">
+        <span class="sec-no">04</span>
+        <div>
+          <h2 class="sec-title">记忆封存机</h2>
+          <p class="sec-en">SEAL A MEMORY — 写入一段舍不得删的记忆，编码、点亮、盖上「无价」</p>
+        </div>
+      </div>
+
+      <div class="seal-grid">
+        <div class="terminal rv">
+          <div class="term-bar">
+            <span class="tb-dot"></span><span class="tb-dot"></span><span class="tb-dot"></span>
+            <em>memory-seal — 数据仅存于本机浏览器</em>
+          </div>
+          <label class="term-label" for="memInput">写入 / WRITE（最多 60 字）</label>
+          <textarea id="memInput" maxlength="60" rows="3"
+            placeholder="例如：高三晚自习，她递来的半块橡皮……"></textarea>
+          <div class="term-foot">
+            <span class="char-count"><b id="charCount">0</b>/60</span>
+            <button class="btn btn-gold magnetic" id="sealBtn"><span>封存 · SEAL</span><i>◈</i></button>
+          </div>
+          <div class="bitstream" id="bitstream" aria-hidden="true"></div>
+        </div>
+
+        <div class="dimm-wrap rv">
+          <div class="dimm" id="dimm">
+            <div class="dimm-label">HUMAN&nbsp;MEMORY&nbsp;·&nbsp;NON-VOLATILE&nbsp;·&nbsp;∞&nbsp;GB</div>
+            <div class="dimm-cells" id="dimmCells"></div>
+            <div class="dimm-contacts" aria-hidden="true"></div>
+            <div class="dimm-notch" aria-hidden="true"></div>
+          </div>
+          <div class="dimm-stats">
+            <span>已封存 <b id="sealedCount">0</b> 段</span>
+            <span>占用 <b id="sealedBytes">0</b> KB / 5120 KB</span>
+            <span>记忆容量 <b>∞</b></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="vault rv">
+        <h3 class="vault-title">本机典藏 / LOCAL VAULT</h3>
+        <p class="vault-empty" id="vaultEmpty">
+          典藏架还空着。硅基的内存正在涨价，而这里的一格，永远免费。
+        </p>
+        <ul class="vault-list" id="vaultList"></ul>
+      </div>
+    </section>
+
+    <!-- ———————————— 05 尾声 ———————————— -->
+    <section class="coda" id="coda">
+      <div class="coda-inner rv">
+        <p class="coda-zh" id="codaZh"></p>
+        <p class="coda-en" id="codaEn"></p>
+        <a class="btn btn-ghost magnetic coda-back" href="../index.html"><span>返回双重读取合集</span><i>←</i></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <span class="nav-seal">珍</span>
+        <div>
+          <strong>记忆星图 · MEMORY ATLAS</strong>
+          <em>爱让记忆变得更加珍贵 / AI has made RAM more expensive</em>
+        </div>
+      </div>
+      <div class="foot-meta">
+        <span>零依赖 · 原生 HTML / CSS / Canvas</span>
+        <a href="README.md">原理与生成信息</a>
+        <span>© <span id="year">2026</span> TRAE</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
